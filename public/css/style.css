@@ -337,6 +337,10 @@
     border: 1px solid #AEAEAE;
     background-color: #F9F9F9;
 }
+
+.core__content--big{
+    height: 90%;
+}
 .core__content--border{
     border:none;
 }
@@ -962,7 +966,7 @@ float: left;
 
 .overlay_estaditica{
     display: none;
-  
+    overflow-y: scroll;
     width: 99.9%;
     height: 100%;
     
@@ -975,15 +979,16 @@ float: left;
 
 .graphs{
     width: 100%;
-    height: 100%;
+    height: auto;
    
 }
 
 .graph__box{
-    width: 32%;
-    height: 100%;
+    padding: 5px;
+    width: 45%;
+    height: 320px;
     margin-right: 1%;
-    
+ 
     display: block;
     float: left;
 }
@@ -994,6 +999,10 @@ float: left;
     display: block;
     float: left;
 
+}
+
+.graph__label--year{
+  height: 10%;
 }
 
 .label__text{
@@ -1014,7 +1023,10 @@ float: left;
     height: 100%;
     
 }
-
+#chartdiv {
+    width: 100%;
+    height: 500px;
+  }
 .button__exportar{
     width: 45%;
     height: 100%;
