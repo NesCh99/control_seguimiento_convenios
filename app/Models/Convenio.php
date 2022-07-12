@@ -15,6 +15,7 @@ class Convenio extends Model
 
     protected $fillable = ['idClasificacion',
                         'texNombreConvenio',
+                        'texObjetoConvenio',
                         'datFechaInicioConvenio',
                         'datFechaFinConvenio',
                         'chaEstadoConvenio',

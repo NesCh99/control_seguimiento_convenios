@@ -13,12 +13,10 @@ class Resolucion extends Model
     const CREATED_AT = 'tstCreacionResolucion'; // personaliza el campo created_at
     const UPDATED_AT = 'tstModificacionResolucion'; // personaliza el campo updated_at
 
-    protected $fillable = ['chaNombreResolucion',
-                        'texObjetoResolucion',
+    protected $fillable = ['chaNombreResolucion',                        
                         'sinTipoResolucion',
-                        'texUrlResolucion',
-                        'tstCreacionDependencia',
-                        'tstModificacionDependencia'];
+                        'tstCreacionResolucion',
+                        'tstModificacionResolucion'];
 
 
     //Relacion muchos a muchos 

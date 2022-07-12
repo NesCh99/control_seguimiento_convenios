@@ -16,9 +16,7 @@ class CreateResolucionesTable extends Migration
         Schema::create('v_resoluciones', function (Blueprint $table) {
             $table->id('idResolucion');//PK
             $table->char('chaNombreResolucion', 50);
-            $table->string('texObjetoResolucion');
             $table->smallInteger('sinTipoResolucion');
-            $table->string('texUrlResolucion')->nullable();
             $table->timestamp('tstCreacionResolucion')->nullable();
             $table->timestamp('tstModificacionResolucion')->nullable();
         });

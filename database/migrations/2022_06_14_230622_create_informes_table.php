@@ -24,12 +24,10 @@ class CreateInformesTable extends Migration
             $table->engine = 'InnoDB'; //Habilitar InnoDB en la Base de Datos
             $table->id('idInforme');//Clave primaria autoincremental
             $table->unsignedbigInteger('idConvenio');//Clave Foranea
-            $table->text('texDescripcionInforme');
+            $table->date('datFechaInicioInforme');
+            $table->date('datFechaFinInforme');
+            $table->timestamp('tstFechaPresentacionInforme')->nullable();
             $table->char('chaEstadoInforme', 10);
-            $table->string('texUrlInforme')->nullable();
-            $table->date('datFechaPresentacionInforme');
-            $table->timestamp('tstCreacionInforme')->nullable();
-            $table->timestamp('tstModificacionInforme')->nullable();
             //Definicion de la clave foranea
             $table->foreign('idConvenio')->references('idConvenio')->on('v_convenios')->onDelete("cascade");
         });

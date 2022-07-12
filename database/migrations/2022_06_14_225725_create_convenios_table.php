@@ -29,8 +29,9 @@ class CreateConveniosTable extends Migration
              * Definicion de atributos
              */
             $table->text('texNombreConvenio', 500);
+            $table->text('texObjetoConvenio', 500);
             $table->date('datFechaInicioConvenio');
-            $table->date('datFechaFinConvenio');
+            $table->date('datFechaFinConvenio')->nullable();
             $table->char('chaEstadoConvenio',10);
             $table->string('texUrlConvenio')->nullable();
             $table->timestamp('tstCreacionConvenio')->nullable();

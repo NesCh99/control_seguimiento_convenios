@@ -10,16 +10,13 @@ class Informe extends Model
     use HasFactory;
     protected $table = 'v_informes';//reconoce el nombre de la tabla
     protected $primaryKey = 'idInforme';//reconoce el nombre del PK
-    const CREATED_AT = 'tstCreacionInforme'; // personaliza el campo created_at
-    const UPDATED_AT = 'tstModificacionInforme'; // personaliza el campo updated_at
 
     protected $fillable = ['idConvenio',
-                        'texDescripcionInforme',
+                        'datFechaInicioInforme',
+                        'datFechaFinInforme',
+                        'tstPresentacionInforme',
                         'chaEstadoInforme',
-                        'texUrlInforme',
-                        'datFechaPresentacionInforme',
-                        'tstCreacionInforme',
-                        'tstModificacionInforme'];
+                        ];
 
     //Relacion muchos a uno inversa
 
