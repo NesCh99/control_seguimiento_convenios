@@ -18,102 +18,99 @@ class ResolucionSeeder extends Seeder
        
 
         Resolucion::create([
-            'chaNombreResolucion' =>  '020.CP.2021',
-            'texObjetoResolucion' => 'Lorem ipsum dolor sit amet.',
+            'chaNombreResolucion' =>  '590.CP.2019',
             'sinTipoResolucion' =>'1',
-            'texUrlResolucion'=>' ',
+           
             'tstCreacionResolucion' => $datenow,
             'tstModificacionResolucion' => $datenow
         ]);
 
         Resolucion::create([
-            'chaNombreResolucion' =>  '021.CP.2021',
-            'texObjetoResolucion' => 'Lorem ipsum dolor sit amet.',
+            'chaNombreResolucion' =>  '039.CP.2021',
             'sinTipoResolucion' =>'1',
-            'texUrlResolucion'=>' ',
+           
             'tstCreacionResolucion' => $datenow,
             'tstModificacionResolucion' => $datenow
         ]);
 
         Resolucion::create([
-            'chaNombreResolucion' =>  '022.CP.2021',
-            'texObjetoResolucion' => 'Lorem ipsum dolor sit amet.',
+            'chaNombreResolucion' =>  '053.CP.2021',
             'sinTipoResolucion' =>'1',
-            'texUrlResolucion'=>' ',
+           
             'tstCreacionResolucion' => $datenow,
             'tstModificacionResolucion' => $datenow
         ]);
         Resolucion::create([
-            'chaNombreResolucion' =>  '023.CP.2021',
-            'texObjetoResolucion' => 'Lorem ipsum dolor sit amet.',
+            'chaNombreResolucion' =>  '054.CP.2021',
+
             'sinTipoResolucion' =>'1',
-            'texUrlResolucion'=>' ',
+            
             'tstCreacionResolucion' => $datenow,
             'tstModificacionResolucion' => $datenow
         ]);
 
         Resolucion::create([
-            'chaNombreResolucion' =>  '024.CP.2021',
-            'texObjetoResolucion' => 'Lorem ipsum dolor sit amet.',
+            'chaNombreResolucion' =>  '305.CP.2021',
+        
             'sinTipoResolucion' =>'1',
-            'texUrlResolucion'=>' ',
-            'tstCreacionResolucion' => $datenow,
-            'tstModificacionResolucion' => $datenow
-        ]);
-
-
-        Resolucion::create([
-            'chaNombreResolucion' =>  '025.CP.2021',
-            'texObjetoResolucion' => 'Lorem ipsum dolor sit amet.',
-            'sinTipoResolucion' =>'1',
-            'texUrlResolucion'=>' ',
+            
             'tstCreacionResolucion' => $datenow,
             'tstModificacionResolucion' => $datenow
         ]);
 
 
         Resolucion::create([
-            'chaNombreResolucion' =>  '026.CP.2021',
-            'texObjetoResolucion' => 'Lorem ipsum dolor sit amet.',
+            'chaNombreResolucion' =>  '545.CP.2021',
+            
+            'sinTipoResolucion' =>'1',
+           
+            'tstCreacionResolucion' => $datenow,
+            'tstModificacionResolucion' => $datenow
+        ]);
+
+
+        Resolucion::create([
+            'chaNombreResolucion' =>  '3300.IDI.ESPOCH.2021',
+          
             'sinTipoResolucion' =>'2',
-            'texUrlResolucion'=>' ',
+            
             'tstCreacionResolucion' => $datenow,
             'tstModificacionResolucion' => $datenow
         ]);
 
         Resolucion::create([
-            'chaNombreResolucion' =>  '027.CP.2021',
-            'texObjetoResolucion' => 'Lorem ipsum dolor sit amet.',
+            'chaNombreResolucion' =>  'ESPOCH-DSO-2021-1220-O ',
+           
             'sinTipoResolucion' =>'2',
-            'texUrlResolucion'=>' ',
+           
             'tstCreacionResolucion' => $datenow,
             'tstModificacionResolucion' => $datenow
         ]);
 
 
         Resolucion::create([
-            'chaNombreResolucion' =>  '028.CP.2021',
-            'texObjetoResolucion' => 'Lorem ipsum dolor sit amet.',
+            'chaNombreResolucion' =>  '3300.IDI.ESPOCH.2021',
+            
             'sinTipoResolucion' =>'2',
-            'texUrlResolucion'=>' ',
+           
             'tstCreacionResolucion' => $datenow,
             'tstModificacionResolucion' => $datenow
         ]);
 
         Resolucion::create([
-            'chaNombreResolucion' =>  '029.CP.2021',
-            'texObjetoResolucion' => 'Lorem ipsum dolor sit amet.',
+            'chaNombreResolucion' =>  ' 0121-D-FM-ESPOCH-2021',
+           
             'sinTipoResolucion' =>'2',
-            'texUrlResolucion'=>' ',
+            
             'tstCreacionResolucion' => $datenow,
             'tstModificacionResolucion' => $datenow
         ]);
 
         Resolucion::create([
-            'chaNombreResolucion' =>  '030.CP.2021',
-            'texObjetoResolucion' => 'Lorem ipsum dolor sit amet.',
+            'chaNombreResolucion' =>  ' ESPOCH-S0.CIVTCT-2021-0094-O',
+          
             'sinTipoResolucion' =>'2',
-            'texUrlResolucion'=>' ',
+          
             'tstCreacionResolucion' => $datenow,
             'tstModificacionResolucion' => $datenow
         ]);

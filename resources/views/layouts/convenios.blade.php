@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" type="text/css" href="/css/dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="/css/buttons.dataTables.min.css">
@@ -12,7 +13,7 @@
 
     <title>CONTROL Y SEGUIMIENTO CONVENIOS </title>
     <link rel="icon" type="image/x-icon" href="/img/logo.png">
-    <script src="/js/table2excel.js"></script> 
+ 
 </head>
 
 <body >
