@@ -25,14 +25,6 @@
 			<div class="tipo estadistica--click tipo--big caducado--click">
 				<span class="label__matriz"><i class="fa-solid fa-chart-column"></i>Convenios Caducados</span>
 			</div>
-            <div class="tipo estadistica--click tipo--big caducado--click">
-				<span class="label__matriz"><i class="fa-solid fa-chart-column"></i>Convenios Vigentes</span>
-			</div>
-
-
-            <div class="tipo estadistica--click tipo--big caducado--click">
-				<span class="label__matriz"><i class="fa-solid fa-chart-column"></i>Convenios Caducados</span>
-			</div>
 		</div>
 		<div class="reporte__content">
 			<div class="overlay__matriz overlay--active">
