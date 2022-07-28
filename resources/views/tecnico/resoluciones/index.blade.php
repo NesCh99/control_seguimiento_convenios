@@ -49,16 +49,7 @@
                     @foreach($resoluciones as $resolucion)
                         <tr class="row">
                             <td>{{$resolucion->idResolucion}}</td>
-                            <td>{{$resolucion->chaNombreResolucion}}
-                            @if(strcmp($resolucion->texUrlResolucion,'Sin Link')!=0)
-                                <a href="{{$resolucion->texUrlResolucion}}" target="_blank"  class="button__table button__table--right">
-                                    <span class="icon__button--update">
-                                    <i class="fa-solid fa-file" style="font-size: 18px;"></i>
-                                    </span>
-                                    <span class="button__table--spam">Ver Documento</span>
-                                </a>                                 
-                            @endif
-                            </td>
+                            <td>{{$resolucion->chaNombreResolucion}}</td>
                             @if($resolucion->sinTipoResolucion == 1)
                             <td>Resolución</td>
                             @else

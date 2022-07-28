@@ -32,46 +32,33 @@
                         </div>
                     <!--Información General -->
                         <div class="content_convenio">
-                            <div class="fila">
-                                <span class="fila__label">Nombre del Convenio
-                                @if(strcmp($convenio->texUrlConvenio,'Sin Link')!=0)
-                                    <a href="{{$convenio->texUrlConvenio}}" target="_blank"  class="button__table button__table--right">
-                                        <span class="icon__button--update">
-                                        <i class="fa-solid fa-file" style="font-size: 18px;"></i>
-                                        </span>
-                                        <span class="button__table--spam">Ver Documento</span>
-                                    </a>                                 
-                                @endif
-                                </span>
-                                <p class="fila__text">{{$convenio->texNombreConvenio}}</p>
-                            </div>
-                            <span style="padding: 5px;" class="fila__label">Resoluciones del Convenio</span>
-                            <div class="wrapper">
+                            <div class="wrapper wrapper__row-3">
                                 <div class="fila">
-                                    <span class="fila__label">Nombre de la Resolución</span>                                    
+                                    <span class="fila__label">Nombre del Convenio
+                                    @if(strcmp($convenio->texUrlConvenio,'Sin Link')!=0)
+                                        <a href="{{$convenio->texUrlConvenio}}" target="_blank"  class="button__table button__table--right">
+                                            <span class="icon__button--update">
+                                            <i class="fa-solid fa-file" style="font-size: 18px;"></i>
+                                            </span>
+                                            <span class="button__table--spam">Ver Documento</span>
+                                        </a>                                 
+                                    @endif
+                                    </span>
+                                    <p class="fila__text">{{$convenio->texNombreConvenio}}</p>
                                 </div>
-
                                 <div class="fila">
-                                    <span class="fila__label">Objeto de la Resolución</span>
+                                    <span class="fila__label">
+                                        Objeto del Convenio
+                                    </span>
+                                    <p class="fila__text">{{$convenio->texObjetoConvenio}}</p>
                                 </div>
-                            </div>
-                            @if(count($convenio->resoluciones)==0)
-                            <div class="fila">
-                                <p class="fila__text">No posee Resoluciones</p>
-                            </div>
-                            @else
-                            @foreach($convenio->resoluciones as $resolucion)
-                                <div class="wrapper">
-                                    <div class="fila">
-                                        <p class="fila__text">{{$resolucion->chaNombreResolucion}}</p>
-                                    </div>
-
-                                    <div class="fila">
-                                        <p class="fila__text">{{$resolucion->texObjetoResolucion}}</p>
-                                    </div>
+                                <div class="fila">
+                                    <span class="fila__label">
+                                        Resolución de Aprobación
+                                    </span>
+                                    <p class="fila__text">{{$convenio->resolucion->chaNombreResolucion}}</p>
                                 </div>
-                            @endforeach
-                            @endif
+                            </div>   
                             <div class="wrapper wrapper__row-3">
                                 <div class="fila">
                                     <span class="fila__label">Fecha de Inicio del Convenio</span>
@@ -83,7 +70,7 @@
                                 </div>
                                 <div class="fila">
                                     <span class="fila__label">Estado del Convenio</span>
-                                    <p class="fila__text">{{$estado}}</p>
+                                    <p class="fila__text">{{$convenio->estado}}</p>
                                 </div>
                             </div>
                             <div class="wrapper">
@@ -105,21 +92,21 @@
                             <div class="wrapper">
                                 <div class="fila">
                                     <span class="fila__label">Criterio Parcial</span>
-                                    <p class="fila__text">{{$criterioParcial}}</p>
+                                    <p class="fila__text">{{$convenio->criterioParcial}}</p>
                                 </div>
                                 <div class="fila">
                                     <span class="fila__label">Cumplimiento Parcial</span>
-                                    <p class="fila__text">{{$cumplimientoParcial}}%</p>
+                                    <p class="fila__text">{{$convenio->cumplimientoParcial}}%</p>
                                 </div>
                             </div>
                             <div class="wrapper">
                                 <div class="fila">
                                     <span class="fila__label">Criterio Total</span>
-                                    <p class="fila__text">{{$criterioTotal}}</p>
+                                    <p class="fila__text">{{$convenio->criterioTotal}}</p>
                                 </div>
                                 <div class="fila">
                                     <span class="fila__label">Cumplimiento Total</span>
-                                    <p class="fila__text">{{$cumplimientoTotal}}%</p>
+                                    <p class="fila__text">{{$convenio->cumplimientoTotal}}%</p>
                                 </div>
                             </div>
                         </div>
@@ -185,97 +172,105 @@
                             </div>
                         </div>
                     </div>
-                <!-- Informes del Convenio -->
-                    <div class="swiper-slide">
+
+                <!-- Información relacionada a los Informes del Convenio -->
+                <div class="swiper-slide">
                         <div class="labels">
                             <div class="label label--disable">
                                 <span class="label__number  label__number--disable">1</span>
                                 <span class="label__text">Información General</span>
                             </div>
                             <div class="label label--next label--disable">
-                                <span class="label__number label__number--disable">2</span>
+                                <span class="label__number  label__number--disable">2</span>
                                 <span class="label__text">Coordinadores</span>
                             </div>
-                            <div class="label label--next">
+                            <div class="label label--next ">
                                 <span class="label__number">3</span>
                                 <span class="label__text">Informes</span>
-                            </div>                               
+                            </div>
                         </div>
                         <div class="content_convenio">
-                            <div class="fila">
-                                <span class="fila__label">Informes Presentados</span>
-                                @if(count($informesPresentados) == 0)
-                                    <p class="fila__text">
-                                        No Posee Informes Presentados
-                                    </p>
-                                @else
-                                <div class="content__table">
-                                    <table class="tabla display" id="Table__InformesPresentados">
-                                        <thead>
-                                            <tr class="col">
-                                                <th>Descripcion</th>
-                                                <th>Fecha de Ingreso del Informe</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($informesPresentados as $informe)
-                                                <tr class="row">
-                                                    <td>{{$informe->texDescripcionInforme}}</td>
-                                                    <td>{{$informe->tstCreacionInforme}}</td>
-                                                    <td>
-                                                        <a href="" class="button__table">
-                                                            <span class="icon__button--view">
-                                                            <i class="fa-solid fa-minus"></i>
-                                                            </span>
-                                                            <span class="button__table--spam">Quitar</span>
-                                                        </a>
-                                                    </td>
+                            <div class="wrapper">
+                                <div class="fila">
+                                    <span class="fila__label">Informes Pendientes</span>
+                                    @if(is_null($informesPendientes))
+                                        <p class="fila__text">
+                                            No Posee Informes Pendientes
+                                        </p>
+                                    @else
+                                    <div class="content__table">
+                                        <table class="tabla display">
+                                            <thead>
+                                                <tr class="col">
+                                                    <th>Descripcion</th>
+                                                    <th>Acciones</th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($informesPendientes as $informe)
+                                                    <tr class="row">
+                                                        <td>{{'Informe del '.$informe->datFechaInicioInforme.' al '.$informe->datFechaFinInforme}}</td>
+                                                        <td>
+                                                            @if($informe['posicion']==1)
+                                                            {!! Form::model($convenio, ['route' => ['tecnico.convenios.asignarInforme', $convenio, $informe], 'method'=>'put']) !!}   
+                                                                <button type="submit" class="button__table">
+                                                                    <span class="icon__button--view">
+                                                                        <i class="fa-solid fa-plus" style="font-size: 18px;"></i>
+                                                                    </span>
+                                                                    <span class="button__table--spam">Presentar</span>
+                                                                </button>
+                                                            {!! Form::close() !!}
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    @endif
                                 </div>
-                                @endif
-                            </div>
-                            <div class="fila">
-                                <span class="fila__label">Informes Pendientes</span>
-                                @if(count($informes) == 0)
-                                    <p class="fila__text">
-                                        No Posee Informes Pendientes
-                                    </p>
-                                @else
-                                <div class="content__table">
-                                    <table class="tabla display" id="Table__InformesPresentados">
-                                        <thead>
-                                            <tr class="col">
-                                                <th>Descripcion</th>
-                                                <th>Fecha de Ingreso del Informe</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($informes as $informe)
-                                                <tr class="row">
-                                                    <td>{{$informe->texDescripcionInforme}}</td>
-                                                    <td>{{$informe->tstCreacionInforme}}</td>
-                                                    <td>
-                                                        <a href="" class="button__table">
-                                                            <span class="icon__button--view">
-                                                            <i class="fa-solid fa-plus"></i>
-                                                            </span>
-                                                            <span class="button__table--spam">Presentar</span>
-                                                        </a>
-                                                    </td>
+                                <div class="fila">
+                                    <span class="fila__label">Informes Presentados</span>
+                                    @if(is_null($informesPresentados))
+                                        <p class="fila__text">
+                                            No Posee Informes Presentados
+                                        </p>
+                                    @else
+                                    <div class="content__table">
+                                        <table class="tabla display">
+                                            <thead>
+                                                <tr class="col">
+                                                    <th>Descripcion</th>
+                                                    <th>Acciones</th>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($informesPresentados as $informe)
+                                                    <tr class="row">
+                                                        <td>{{'Informe del '.$informe->datFechaInicioInforme.' al '.$informe->datFechaFinInforme}}</td>
+                                                        <td>
+                                                            @if($informe['posicion'] == count($informesPresentados))
+                                                                {!! Form::model($convenio, ['route' => ['tecnico.convenios.quitarInforme', $convenio, $informe], 'method'=>'put']) !!}   
+                                                                    <button type="submit" class="button__table">
+                                                                        <span class="icon__button--view">
+                                                                            <i class="fa-solid fa-minus" style="font-size: 18px; color: red;"></i>
+                                                                        </span>
+                                                                        <span class="button__table--spam">Quitar</span>
+                                                                    </button>
+                                                                {!! Form::close() !!}
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    @endif
                                 </div>
-                                @endif
-                            </div>
+                            </div>                            
                         </div>
                     </div>
+                </div>
             </div>
         </div> 
     </div>

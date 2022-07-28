@@ -24,6 +24,7 @@ class CreateConveniosTable extends Migration
             $table->engine = 'InnoDB'; //Habilitar InnoDB en la Base de Datos
             $table->id('idConvenio');//Clave primaria autoincremental
             $table->unsignedbigInteger('idClasificacion');//Clave Foranea
+            $table->unsignedbigInteger('idResolucion');//Clave Foranea
             
             /**
              * Definicion de atributos
@@ -38,6 +39,7 @@ class CreateConveniosTable extends Migration
             $table->timestamp('tstModificacionConvenio')->nullable();
             //Definicion de la clave foranea
             $table->foreign('idClasificacion')->references('idClasificacion')->on('v_clasificaciones')->onDelete("cascade");
+            $table->foreign('idResolucion')->references('idResolucion')->on('v_resoluciones')->onDelete("cascade");
             
         });
     }

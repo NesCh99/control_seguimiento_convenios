@@ -39,10 +39,10 @@
                 </div>
                 <thead>
                     <tr class="col">
-                        <th>ID</th>
-                        <th>Coordinador</th>
-                        <th>Cargo</th>
                         <th>Dependencia</th>
+                        <th>Cargo</th>
+                        <th>Coordinador</th>
+                        <th>Resoluciones</th>
                         <th>Celular</th>
                         <th>Acciones</th>
                     </tr>
@@ -50,10 +50,19 @@
                 <tbody>
                     @foreach($coordinadores as $coordinador)
                         <tr class="row">
-                            <td>{{$coordinador->idCoordinador}}</td>
-                            <td>{{$coordinador->chaTituloCoordinador.' '.$coordinador->chaNombreCoordinador}}</td>
-                            <td>{{$coordinador->chaCargoCoordinador}}</td>
                             <td>{{$coordinador->dependencia->vchNombreDependencia}}</td>
+                            <td>{{$coordinador->chaCargoCoordinador}}</td>
+                            <td>{{$coordinador->chaTituloCoordinador.' '.$coordinador->chaNombreCoordinador}}</td>
+                            <td>
+                                @if(count($coordinador->resoluciones)!=0)
+                                    @foreach($coordinador->resoluciones as $resolucion)
+                                        {{$resolucion->chaNombreResolucion}}
+                                        <br>
+                                    @endforeach
+                                @else
+                                Aún no se asignan resoluciones
+                                @endif
+                            </td>
                             <td>{{$coordinador->chaCelularCoordinador}}</td>
                             <td>
                                 <a href="{{route('tecnico.coordinadores.show', $coordinador)}}" class="button__table">

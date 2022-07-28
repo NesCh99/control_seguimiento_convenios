@@ -27,6 +27,7 @@
                 Convenios
             </span>
         </div>
+        
         <div class="content__table">
             <table class="tabla display" id="Table__Convenios">
                 <div class="button">
@@ -39,19 +40,44 @@
                 </div>
                 <thead>
                     <tr class="col">
-                        <th>ID</th>
+                        <th>Resolución</th>
                         <th>Convenio</th>
-                        <th>Fecha de Inicio</th>
-                        <th>Fecha de Fin</th>
+                        <th>Objeto del Convenio</th>
+                        <th>Coordinador</th>
                         <th>Estado</th>
+                        <th>Legalización y Vigencia</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($convenios as $convenio)
                         <tr class="row">
-                            <td><b>{{$convenio->idConvenio}}</b></td>
+                            <td><b>{{$convenio->Resolucion}}</b></td>
                             <td>{{$convenio->texNombreConvenio}}
+                            <td>{{$convenio->texObjetoConvenio}}</td>
+                            <td>
+                                @if(is_null($convenio->Coordinador)==false)
+                                    {{$convenio->Coordinador->chaCargoCoordinador}}
+                                    <br>
+                                    {{$convenio->Coordinador->dependencia->vchNombreDependencia}}
+                                    <br>
+                                    Mediante 
+                                    {{$convenio->Coordinador->pivot->chaNombreResolucion}}
+                                    @if(is_null($convenio->Delegado)==false)
+                                        <br>
+                                        Delega a
+                                        <br>
+                                        {{$convenio->Delegado->chaCargoCoordinador}}
+                                        <br>
+                                        {{$convenio->Delegado->dependencia->vchNombreDependencia}}
+                                        <br>
+                                        Mediante 
+                                        {{$convenio->Delegado->pivot->chaNombreResolucion}}
+                                    @endif
+                                @else
+                                Sin Coordinador
+                                @endif
+                            </td>
                             @if(strcmp($convenio->texUrlConvenio,'Sin Link')!=0)
                                 <a href="{{$convenio->texUrlConvenio}}" target="_blank"  class="button__table button__table--right">
                                     <span class="icon__button--update">
@@ -61,20 +87,16 @@
                                 </a>                                 
                             @endif
                             </td>
-                            <td>{{$convenio->datFechaInicioConvenio}}</td>
-                            <td>{{$convenio->datFechaFinConvenio}}</td>
-                            <?php 
-                                $fecha1 = new DateTime($convenio->datFechaFinConvenio); 
-                                $fecha2 = new DateTime();
-                                $estado = $fecha2->diff($fecha1)->format('%r%y') * 12;
-                                if($estado > 0 && $estado > 6){
-                                    $estado = 'Vigente';
-                                }else if($estado > 0 && $estado <= 6){
-                                    $estado = 'Por Caducar';
-                                }else{
-                                    $estado = 'Caducado';
-                                }?>
-                            <td>{{$estado}}</td>
+                            <td>{{$convenio->Estado}}</td>
+                            <td>Legalizado
+                                <br>
+                                {{$convenio->datFechaInicioConvenio}}
+                                <br>
+                                <br>
+                                Vigencia
+                                <br>
+                                {{$convenio->Vigencia}}
+                            </td>
                             <td>
                                 <a href="{{route('tecnico.convenios.show', $convenio)}}" class="button__table">
                                     <span class="icon__button--view">
@@ -102,6 +124,11 @@
         </div>
     </div>
 </section>
+<script>
+function filtroEstado(){
+    document.getElementById("filtro").submit(); 
+}
+</script>
 @endsection
 
                 

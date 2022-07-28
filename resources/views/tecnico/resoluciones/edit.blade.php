@@ -29,17 +29,6 @@
                     @enderror
                 </p>
                 <p>
-                    {!! Form::label('Link', 'Link del Documento de la Resolucion') !!}
-                    @if(strcmp($resolucion->texUrlResolucion,'Sin Link')==0)
-                        {!! Form::text('Link',null, ['class'=>'input form-control']) !!}
-                    @else
-                        {!! Form::text('Link', $resolucion->texUrlResolucion, ['class'=>'input form-control']) !!}
-                    @endif
-                    @error('Link')
-                    <span class="text--danger">{{$message}}</span>
-                    @enderror
-                </p>
-                <p>
                     {!! Form::label('Tipo', 'Tipo de Resolucion') !!}
                     <select name="Tipo" id="Tipo" class="input form-control">
                         @if($resolucion->sinTipoResolucion == 1)
@@ -51,14 +40,6 @@
                         @endif
                     </select>
                 </p>
-                <p>
-                    {!! Form::label('Objeto', 'Objeto de la Resolucion') !!}
-                    {!! Form::textarea('Objeto', $resolucion->texObjetoResolucion, ['class'=>'input form-control']) !!}
-                    @error('Objeto')
-                    <span class="text--danger">{{$message}}</span>
-                    @enderror
-                </p>
-
                 <p class="block">
                     <button type="submit" class="button button--rigth "><span>  <i class="fa-solid fa-file-arrow-down"></i> <span> </span>Registrar</span>
                     </button>

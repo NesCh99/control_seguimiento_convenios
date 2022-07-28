@@ -26,7 +26,9 @@ class CreateConvenioCoordinadorsTable extends Migration
             /**
              * Definicion de atributos
              */
-            $table->char('chaEstadoCoordinador', 15);
+            $table->char('chaTipoCoordinador', 15);
+            $table->char('chaEstadoCoordinador', 10);
+            $table->char('chaNombreResolucion', 50);
             //Definicion de las claves foranea
             $table->foreign('idConvenio')->references('idConvenio')->on('v_convenios')->onDelete("cascade");
             $table->foreign('idCoordinador')->references('idCoordinador')->on('v_coordinadores')->onDelete("cascade");

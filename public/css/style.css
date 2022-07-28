@@ -1044,13 +1044,6 @@ float: left;
 /*Alertas*/
 
 /* Message box de alertas */
-.alert {
-padding:15px;
-margin-top: 10px;
-border:1px solid transparent;
-border-radius:4px;
-width: 96%;
-}
 
 .alert--info{
 color:#31708f;
@@ -1115,4 +1108,22 @@ p{
     margin-top: 6px;
 }
 
+/*Badges*/
+.badge {
+    padding: 4px 8px;
+    text-align: center;
+    border-radius: 5px;
+}
+.badge--info {
+    background-color: blue;
+    color: white;
+}
+.badge--danger {
+    background-color: red;
+    color: white;
+}
+.badge--inactive {
+    background-color: gray;
+    color: white;
+}
 

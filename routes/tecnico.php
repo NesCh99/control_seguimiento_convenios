@@ -22,8 +22,8 @@ Route::put('convenios/{idConvenio}/asignarCoordinador/{idCoordinador}', [Conveni
 Route::put('convenios/{idConvenio}/quitarCoordinador/{idCoordinador}', [ConvenioController::class, 'quitarCoordinador'])->name('tecnico.convenios.quitarCoordinador');
 Route::put('convenios/{idConvenio}/asignarResolucion/{idResolucion}', [ConvenioController::class, 'asignarResolucion'])->name('tecnico.convenios.asignarResolucion');
 Route::put('convenios/{idConvenio}/quitarResolucion/{idResolucion}', [ConvenioController::class, 'quitarResolucion'])->name('tecnico.convenios.quitarResolucion');
-Route::put('convenios/{idConvenio}/asignarInforme/', [ConvenioController::class, 'asignarInforme'])->name('tecnico.convenios.asignarInforme');
-Route::put('convenios/{idConvenio}/quitarInforme/', [ConvenioController::class, 'quitarInforme'])->name('tecnico.convenios.quitarInforme');
+Route::put('convenios/{idConvenio}/asignarInforme/{idInforme}', [ConvenioController::class, 'asignarInforme'])->name('tecnico.convenios.asignarInforme');
+Route::put('convenios/{idConvenio}/quitarInforme/{idInforme}', [ConvenioController::class, 'quitarInforme'])->name('tecnico.convenios.quitarInforme');
 Route::put('resoluciones/{id}/asignarCoordinador', [ResolucionController::class, 'asignarCoordinador'])->name('tecnico.resoluciones.asignarCoordinador');
 Route::put('resoluciones/{idResolucion}/quitarCoordinador/{idCoordinador}', [ResolucionController::class, 'quitarCoordinador'])->name('tecnico.resoluciones.quitarCoordinador');
 Route::resource('resoluciones', ResolucionController::class)->names('tecnico.resoluciones');

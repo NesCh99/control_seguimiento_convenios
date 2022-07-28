@@ -13,10 +13,11 @@ class CreateConveniosResolucionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('v_convenios_resoluciones', function (Blueprint $table) {
-            /**
+        /**
              * Tabla muchos a muchos
              */
+       /*  Schema::create('v_convenios_resoluciones', function (Blueprint $table) {
+            
             $table->unsignedBigInteger('idResolucion');
             $table->unsignedBigInteger('idConvenio');
 
@@ -25,7 +26,7 @@ class CreateConveniosResolucionesTable extends Migration
             $table->foreign('idConvenio')->references('idConvenio')->on('v_convenios')->onDelete("cascade");
 
 
-        });
+        }); */
     }
 
     /**

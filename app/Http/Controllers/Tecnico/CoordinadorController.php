@@ -51,13 +51,13 @@ class CoordinadorController extends Controller
         $contacto = $request->input('Celular');
         $titulo = $request->input('Titulo');
 
-        if(isNull($nombre)){
+        if(strlen($nombre)==0){
             $nombre = 'Sin Nombre';
         }
-        if(isNull($titulo)){
+        if(strlen($titulo)==0){
             $titulo = 'Sin Titulo';
         }
-        if(isNull($contacto)){
+        if(strlen($contacto)==0){
             $contacto = '0000000000';
         }
         $coordinador = Coordinador::create([
@@ -112,12 +112,26 @@ class CoordinadorController extends Controller
             'Titulo'=>'required',
         ]);
 
+        $nombre = $request->input('Nombre');
+        $contacto = $request->input('Celular');
+        $titulo = $request->input('Titulo');
+
+        if(strlen($nombre)==0){
+            $nombre = 'Sin Nombre';
+        }
+        if(strlen($titulo)==0){
+            $titulo = 'Sin Titulo';
+        }
+        if(strlen($contacto)==0){
+            $contacto = '0000000000';
+        }
+
         $coordinador->update([
             'idDependencia' => $request->input('Dependencia'),
-            'chaNombreCoordinador' => $request->input('Nombre'),
-            'chaTituloCoordinador' => $request->input('Titulo'),
+            'chaNombreCoordinador' => $nombre,
+            'chaTituloCoordinador' => $titulo,
             'chaCargoCoordinador' => $request->input('Cargo'),
-            'chaCelularCoordinador' => $request->input('Celular'),
+            'chaCelularCoordinador' => $contacto,
         ]);
 
         return redirect()->route('tecnico.coordinadores.index', $coordinador)->with('info', $coordinador->chaNombreCoordinador.' ha sido actualizado con éxito');

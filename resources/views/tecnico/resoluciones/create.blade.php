@@ -27,27 +27,12 @@
                     @enderror
                 </p>
                 <p>
-                    {!! Form::label('Link', 'Link del Documento de la Resolucion') !!}
-                    {!! Form::text('Link', null, ['class'=>'input form-control']) !!}
-                    @error('Link')
-                    <span class="text--danger">{{$message}}</span>
-                    @enderror
-                </p>
-                <p>
                     {!! Form::label('Tipo', 'Tipo de Resolucion') !!}
                     <select name="Tipo" id="Tipo" class="input form-control">
                         <option value="1">Resolución</option>
                         <option value="2">Oficio</option>
                     </select>
-                </p>
-                <p>
-                    {!! Form::label('Objeto', 'Objeto de la Resolucion') !!}
-                    {!! Form::textarea('Objeto', null, ['class'=>'input form-control', 'style' => 'height:40px;']) !!}
-                    @error('Objeto')
-                    <span class="text--danger">{{$message}}</span>
-                    @enderror
-                </p>
-                
+                </p>                
                 <p class="block">
                     <button type="submit" class="button button--rigth "><span>  <i class="fa-solid fa-file-arrow-down"></i> <span> </span>    Registrar</span>
                     </button>

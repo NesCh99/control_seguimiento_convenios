@@ -45,24 +45,11 @@ class ResolucionController extends Controller
     {
         $request->validate([
             'Nombre' => 'required|string|max:30|unique:v_resoluciones,chaNombreResolucion',
-            'Objeto' => 'required|string|max:255',
-        ]);
-        
-        if(strlen($request->input('Link')) == 0){
-            $link = 'Sin Link';
-        }else{
-            $request->validate([
-                'Link' => 'url'
-            ]);
-            $link = $request->input('Link');
-        }
-        
+        ]);        
 
         $resolucion = Resolucion::create([
             'chaNombreResolucion' => strtoupper($request->input('Nombre')),
-            'texObjetoResolucion' => $request->input('Objeto'),
-            'sinTipoResolucion' => $request->input('Tipo'),
-            'texUrlResolucion' => $link
+            'sinTipoResolucion' => $request->input('Tipo')
         ]);
 
         return redirect()->route('tecnico.resoluciones.index', $resolucion)->with('info', $resolucion->chaNombreResolucion .' ha sido registrado con éxito');
@@ -104,22 +91,10 @@ class ResolucionController extends Controller
         $resolucion = Resolucion::find($id);
         $request->validate([
             'Nombre' => "required|string|max:25|unique:v_resoluciones,chaNombreResolucion,$resolucion->idResolucion,idResolucion",
-            'Objeto' => 'required|string|max:255',
         ]);
-
-        if(strlen($request->input('Link')) == 0){
-            $link = 'Sin Link';
-        }else{
-            $request->validate([
-                'Link' => 'url'
-            ]);
-            $link = $request->input('Link');
-        }
         $resolucion ->update([
             'chaNombreResolucion' => strtoupper($request->input('Nombre')),
-            'texObjetoResolucion' => $request->input('Objeto'),
             'sinTipoResolucion' => $request->input('Tipo'),
-            'texUrlResolucion' => $link
         ]);
 
         return redirect()->route('tecnico.resoluciones.index', $resolucion)->with('info', $resolucion->chaNombreResolucion .' ha sido actualizado con éxito');
