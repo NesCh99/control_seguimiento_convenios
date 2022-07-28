@@ -24,9 +24,9 @@
 			@endif
 		</div>
 		<div class="graph">
-			<canvas class="canvas" id="graph4">
+			<canvas class="canvas" id="graph11">
 			</canvas>
-			<div class="button button--excel bg-info" id="exportar__grafico--4">
+			<div class="button button--excel bg-info" id="exportar__grafico--11">
 				<span  class="nav__link nav__link--small nav__link--white">
 				<span class="link__icon--margin">
 				<i class="fa-solid fa-file"></i>
@@ -46,9 +46,9 @@
 			</h5>
 		</div>
 		<div class="graph">
-			<canvas class="canvas" id="graph5">
+			<canvas class="canvas" id="graph12">
 			</canvas>
-			<div class="button button--excel" id="exportar__grafico--5">
+			<div class="button button--excel" id="exportar__grafico--12">
 				<span  class="nav__link nav__link--small nav__link--white">
 				<span class="link__icon--margin">
 				<i class="fa-solid fa-file"></i>
@@ -67,9 +67,9 @@
 			@endif
 		</div>
 		<div class="graph">
-			<canvas class="canvas" id="graph7">
+			<canvas class="canvas" id="graph13">
 			</canvas>
-			<div class="button button--excel" id="exportar__grafico--6">
+			<div class="button button--excel" id="exportar__grafico--13">
 				<span  class="nav__link nav__link--small nav__link--white">
 				<span class="link__icon--margin">
 				<i class="fa-solid fa-file"></i>

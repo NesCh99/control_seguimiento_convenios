@@ -31,6 +31,7 @@
         <footer class="footer">
             <p class="footer__text">
                    Escuela Superior Politécnica de Chimborazo © 2022
+                   
             </p>
         </footer>
 

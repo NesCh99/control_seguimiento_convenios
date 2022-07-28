@@ -25,12 +25,14 @@
 			<div class="tipo estadistica--click tipo--big caducado--click">
 				<span class="label__matriz"><i class="fa-solid fa-chart-column"></i>Convenios Caducados</span>
 			</div>
-            <div class="tipo estadistica--click tipo--big caducado--click">
+
+
+            <div class="tipo estadistica--click tipo--big vigente-g--click">
 				<span class="label__matriz"><i class="fa-solid fa-chart-column"></i>Convenios Vigentes</span>
 			</div>
 
 
-            <div class="tipo estadistica--click tipo--big caducado--click">
+            <div class="tipo estadistica--click tipo--big caducado-g--click">
 				<span class="label__matriz"><i class="fa-solid fa-chart-column"></i>Convenios Caducados</span>
 			</div>
 		</div>
@@ -183,6 +185,17 @@
 			<div class="overlay_estaditica caducado_overlay--click">
 				@include('tecnico.reportes.graficos.graficosCaducados')
 			</div>
+
+			<div class="overlay_estaditica vigenteG_overlay--click">
+				@include('tecnico.reportes.graficos.graficosEspecificosCaducados')
+			</div>
+
+
+			<div class="overlay_estaditica caducadoG_overlay--click">
+				@include('tecnico.reportes.graficos.graficosEspecificosVigentes')
+			</div>
+
+
 		</div>
 	</div>
 	<?php
@@ -447,117 +460,270 @@
 		plugins:[ChartDataLabels]
 	});
 	
-	
-	
-</script>
-<script>
-	const btnImagen = document.querySelector("#exportar__grafico--1");
-	const imagen1 = document.querySelector("#graph1");
-	const btnImagen2 = document.querySelector("#exportar__grafico--2");
-	const imagen2 = document.querySelector("#graph2");
-	const btnImagen3 = document.querySelector("#exportar__grafico--3");
-	const imagen3 = document.querySelector("#graph3");
-	
-	
-	
-	const btnImagen4 = document.querySelector("#exportar__grafico--4");
-	const imagen4 = document.querySelector("#graph4");
-	const btnImagen5 = document.querySelector("#exportar__grafico--5");
-	const imagen5 = document.querySelector("#graph5");
-	
-	const btnImagen6 = document.querySelector("#exportar__grafico--6");
-	const imagen6 = document.querySelector("#graph7");
-	
-	
-	
-	
-	
-	btnImagen.addEventListener("click", function(){
-	
-	  if(window.navigator.msSaveBlob){
-	     window.navigator.msSaveBlob(imagen1.msToBlob(),"convenios-clasificacion.png");
-	  }else{
-	    const a = document.createElement("a");
-		a.href= imagen1.toDataURL();
-		a.download ="convenios-clasificacion.png";
-		a.click();
-	  }
+
+
+
+
+	let graph8=document.getElementById("graph8").getContext("2d");
+	var char = new Chart(graph8,{
+	  type: 'bar',
+	    data: {
+	        labels: ['Convenio Marco', 'Convenio Específico', 'Convenio Internacional'],
+	        datasets: [{
+	            label: 'Nivel de Cumplimineto Total',
+	            data: [{{$cumpliminetoMarcoTotalCaducado}}, {{$cumplimientoEspecificoTotalCaducado}}, {{$cumplimientoInternacionalTotalCaducado}}],
+	            backgroundColor: [
+	                'rgba(13,25,191,0.2)',
+					
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)'
+	                
+	                
+	            ],
+	            borderColor: [
+	                'rgba(13,25,191,1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)'
+	               
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            y: {
+	                beginAtZero: true
+	            }, 
+	        },
+			plugins: {
+	     datalabels: {
+	     }
+	   }
+	    },
+		plugins:[ChartDataLabels]
 	});
 	
 
-	btnImagen2.addEventListener("click", function(){
-	
-	if(window.navigator.msSaveBlob){
-	   window.navigator.msSaveBlob(imagen2.msToBlob(),"nivel-cumplimineto-parcial.png");
-	}else{
-	  const a = document.createElement("a");
-	  a.href= imagen2.toDataURL();
-	  a.download ="nivel-cumplimineto-parcial.png";
-	  a.click();
-	}
-	 });
 
-	btnImagen3.addEventListener("click", function(){
-	
-	if(window.navigator.msSaveBlob){
-	   window.navigator.msSaveBlob(imagen3.msToBlob(),"nivel-cumplimineto-total.png");
-	}else{
-	  const a = document.createElement("a");
-	  a.href= imagen3.toDataURL();
-	  a.download ="nivel-cumplimineto-total.png";
-	  a.click();
-	}
-	 });
-	
-	 btnImagen4.addEventListener("click", function(){
-	
-	if(window.navigator.msSaveBlob){
-	   window.navigator.msSaveBlob(imagen4.msToBlob(),"convenios-caducados.png");
-	}else{
-	  const a = document.createElement("a");
-	  a.href= imagen4.toDataURL();
-	  a.download ="convenios-caducados.png";
-	  a.click();
-	}
-	 });
-	
-	
-	
-	
-	
-	
-	
-	 btnImagen5.addEventListener("click", function(){
-	
-	if(window.navigator.msSaveBlob){
-	   window.navigator.msSaveBlob(imagen5.msToBlob(),"nivel-cumplimineto-Parcial-caducado.png");
-	}else{
-	  const a = document.createElement("a");
-	  a.href= imagen5.toDataURL();
-	  a.download ="nivel-cumplimineto-Parcial-caducado.png";
-	  a.click();
-	}
-	 });
 
-	 btnImagen6.addEventListener("click", function(){
+
+
+	let graph9=document.getElementById("graph9").getContext("2d");
+	var char = new Chart(graph9,{
+	  type: 'bar',
+	    data: {
+	        labels: ['Convenio Marco', 'Convenio Específico', 'Convenio Internacional'],
+	        datasets: [{
+	            label: 'Nivel de Cumplimineto Total',
+	            data: [{{$cumpliminetoMarcoTotalCaducado}}, {{$cumplimientoEspecificoTotalCaducado}}, {{$cumplimientoInternacionalTotalCaducado}}],
+	            backgroundColor: [
+	                'rgba(13,25,191,0.2)',
+					
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)'
+	                
+	                
+	            ],
+	            borderColor: [
+	                'rgba(13,25,191,1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)'
+	               
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            y: {
+	                beginAtZero: true
+	            }, 
+	        },
+			plugins: {
+	     datalabels: {
+	     }
+	   }
+	    },
+		plugins:[ChartDataLabels]
+	});
 	
-	if(window.navigator.msSaveBlob){
-	   window.navigator.msSaveBlob(image6.msToBlob(),"nivel-cumplimineto-total-caducado.png");
-	}else{
-	  const a = document.createElement("a");
-	  a.href= imagen6.toDataURL();
-	  a.download ="nivel-cumplimineto-total-caducado.png";
-	  a.click();
-	}
-	 });
+
+
+
+
+
+	let graph10=document.getElementById("graph10").getContext("2d");
+	var char = new Chart(graph10,{
+	  type: 'bar',
+	    data: {
+	        labels: ['Convenio Marco', 'Convenio Específico', 'Convenio Internacional'],
+	        datasets: [{
+	            label: 'Nivel de Cumplimineto Total',
+	            data: [{{$cumpliminetoMarcoTotalCaducado}}, {{$cumplimientoEspecificoTotalCaducado}}, {{$cumplimientoInternacionalTotalCaducado}}],
+	            backgroundColor: [
+	                'rgba(13,25,191,0.2)',
+					
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)'
+	                
+	                
+	            ],
+	            borderColor: [
+	                'rgba(13,25,191,1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)'
+	               
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            y: {
+	                beginAtZero: true
+	            }, 
+	        },
+			plugins: {
+	     datalabels: {
+	     }
+	   }
+	    },
+		plugins:[ChartDataLabels]
+	});
 	
+
+
+
+
+
+	let graph11=document.getElementById("graph11").getContext("2d");
+	var char = new Chart(graph11,{
+	  type: 'bar',
+	    data: {
+	        labels: ['Convenio Marco', 'Convenio Específico', 'Convenio Internacional'],
+	        datasets: [{
+	            label: 'Nivel de Cumplimineto Total',
+	            data: [{{$cumpliminetoMarcoTotalCaducado}}, {{$cumplimientoEspecificoTotalCaducado}}, {{$cumplimientoInternacionalTotalCaducado}}],
+	            backgroundColor: [
+	                'rgba(13,25,191,0.2)',
+					
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)'
+	                
+	                
+	            ],
+	            borderColor: [
+	                'rgba(13,25,191,1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)'
+	               
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            y: {
+	                beginAtZero: true
+	            }, 
+	        },
+			plugins: {
+	     datalabels: {
+	     }
+	   }
+	    },
+		plugins:[ChartDataLabels]
+	});
 	
+
+
+
+
+
+
+	let graph12=document.getElementById("graph12").getContext("2d");
+	var char = new Chart(graph12,{
+	  type: 'bar',
+	    data: {
+	        labels: ['Convenio Marco', 'Convenio Específico', 'Convenio Internacional'],
+	        datasets: [{
+	            label: 'Nivel de Cumplimineto Total',
+	            data: [{{$cumpliminetoMarcoTotalCaducado}}, {{$cumplimientoEspecificoTotalCaducado}}, {{$cumplimientoInternacionalTotalCaducado}}],
+	            backgroundColor: [
+	                'rgba(13,25,191,0.2)',
+					
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)'
+	                
+	                
+	            ],
+	            borderColor: [
+	                'rgba(13,25,191,1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)'
+	               
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            y: {
+	                beginAtZero: true
+	            }, 
+	        },
+			plugins: {
+	     datalabels: {
+	     }
+	   }
+	    },
+		plugins:[ChartDataLabels]
+	});
 	
+
+
+
+
+	let graph13=document.getElementById("graph13").getContext("2d");
+	var char = new Chart(graph13,{
+	  type: 'bar',
+	    data: {
+	        labels: ['Convenio Marco', 'Convenio Específico', 'Convenio Internacional'],
+	        datasets: [{
+	            label: 'Nivel de Cumplimineto Total',
+	            data: [{{$cumpliminetoMarcoTotalCaducado}}, {{$cumplimientoEspecificoTotalCaducado}}, {{$cumplimientoInternacionalTotalCaducado}}],
+	            backgroundColor: [
+	                'rgba(13,25,191,0.2)',
+					
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)'
+	                
+	                
+	            ],
+	            borderColor: [
+	                'rgba(13,25,191,1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)'
+	               
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            y: {
+	                beginAtZero: true
+	            }, 
+	        },
+			plugins: {
+	     datalabels: {
+	     }
+	   }
+	    },
+		plugins:[ChartDataLabels]
+	});
 	
-	
-	
-	
-	
-	
+
 </script>
+<script src="{{asset('js/reportes/generarImages.js')}}"></script>
 @endsection
