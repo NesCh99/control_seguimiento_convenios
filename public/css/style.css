@@ -1,4 +1,6 @@
 
+
+
 /*GENERAL*/
 @font-face {
     font-family: 'HelveticaNeueLTStd';
@@ -337,6 +339,10 @@
     border: 1px solid #AEAEAE;
     background-color: #F9F9F9;
 }
+
+.core__content--big{
+    height: 90%;
+}
 .core__content--border{
     border:none;
 }
@@ -395,7 +401,42 @@ padding-right: 8px;
     border-radius: 3px;
 
 }
+.dt-button{
+   
+    border: none!important;
+    background-color: #0F703B!important;
+    color: white!important;
+    margin-right: 5px!important;
+}
+.buttonFecha{
+  
+    margin-top: 2px;
+    width: auto;
+    height: auto;
+    line-height: 23px;
+   
+    display: block;
+    float: right;
+    position: relative;
+    z-index: 999;
+    margin-right: 20px;
+    border-radius: 3px;
+}
+.labelFecha{
+    width: auto;
+    height: 100%;
+    display: block;
+    float: left;
+   line-height: 40px;
+   margin-right: 10px;
+}
 
+.fecha{
+    width: auto;
+    height: 100%;
+    display: block;
+    float: left;
+}
 .button--excel{
     border: none;
     background-color: #0F703B;
@@ -420,7 +461,7 @@ padding-right: 8px;
   color:#555555;
   font-size: 12px;
   border-collapse: collapse;
-  
+ 
 }
 .col{
     text-align: left;
@@ -927,6 +968,7 @@ float: left;
 }
 .tipo--big{
     width: auto;
+    margin-right: 20px;
 }
 .tipo:hover{
     background-color: #EEEEEE;
@@ -956,13 +998,13 @@ float: left;
   height: 100%;
   display: none;
   overflow-y: scroll;
-  overflow-x: scroll;
+
   
 }
 
 .overlay_estaditica{
     display: none;
-  
+    overflow-y: scroll;
     width: 99.9%;
     height: 100%;
     
@@ -974,16 +1016,18 @@ float: left;
 }
 
 .graphs{
+    margin-top: 80px;
     width: 100%;
-    height: 100%;
+    height: auto;
    
 }
 
 .graph__box{
-    width: 32%;
-    height: 100%;
+    padding: 5px;
+    width: 45%;
+    height: 320px;
     margin-right: 1%;
-    
+ 
     display: block;
     float: left;
 }
@@ -994,6 +1038,10 @@ float: left;
     display: block;
     float: left;
 
+}
+
+.graph__label--year{
+  height: 10%;
 }
 
 .label__text{
@@ -1014,7 +1062,10 @@ float: left;
     height: 100%;
     
 }
-
+#chartdiv {
+    width: 100%;
+    height: 500px;
+  }
 .button__exportar{
     width: 45%;
     height: 100%;
@@ -1044,6 +1095,13 @@ float: left;
 /*Alertas*/
 
 /* Message box de alertas */
+.alert {
+padding:15px;
+margin-top: 10px;
+border:1px solid transparent;
+border-radius:4px;
+width: 96%;
+}
 
 .alert--info{
 color:#31708f;
@@ -1108,22 +1166,54 @@ p{
     margin-top: 6px;
 }
 
-/*Badges*/
-.badge {
-    padding: 4px 8px;
-    text-align: center;
-    border-radius: 5px;
-}
-.badge--info {
-    background-color: blue;
-    color: white;
-}
-.badge--danger {
-    background-color: red;
-    color: white;
-}
-.badge--inactive {
-    background-color: gray;
-    color: white;
+.filtro{
+    width: 100%;
+    height: 40px;
+    margin-top: 10px;
+   
+  
+    
 }
 
+.filtro__vigente,
+.filtro__caducado{
+    width: 50%;
+    height: 100%;
+    display: block;
+    float: left;
+   
+
+}
+
+.filtro__year,
+.filtro__input{
+   
+    width: 50%;
+    height: 100%;
+    display: block;
+    float: left;
+   
+}
+.filtro__year{
+    width: auto;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+.filtro__input{
+    line-height: 40px;
+}
+
+.filtro__input{
+    margin-top: -10px;
+}
+.clearfix{
+  float: none;
+  clear: both;
+}
+
+
+
+@media(max-width: 649px){
+    
+       
+}
