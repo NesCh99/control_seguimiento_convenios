@@ -4,6 +4,7 @@ use App\Http\Controllers\Tecnico\ConvenioController;
 use App\Http\Controllers\Tecnico\HomeController;
 use App\Http\Controllers\Tecnico\CoordinadorController;
 use App\Http\Controllers\Tecnico\ResolucionController;
+use App\Http\Controllers\Tecnico\ReporteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +28,6 @@ Route::put('convenios/{idConvenio}/quitarInforme/{idInforme}', [ConvenioControll
 Route::put('resoluciones/{id}/asignarCoordinador', [ResolucionController::class, 'asignarCoordinador'])->name('tecnico.resoluciones.asignarCoordinador');
 Route::put('resoluciones/{idResolucion}/quitarCoordinador/{idCoordinador}', [ResolucionController::class, 'quitarCoordinador'])->name('tecnico.resoluciones.quitarCoordinador');
 Route::resource('resoluciones', ResolucionController::class)->names('tecnico.resoluciones');
+
+Route::get('/reportes', [ReporteController::class, 'index'])->name('tecnico.reporte');
+Route::post('/reportes', [ReporteController::class, 'index'])->name('tecnico.reporte');

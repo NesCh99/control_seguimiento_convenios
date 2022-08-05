@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ClasificacionesSeeder::class);
         $this->call(EjesSeeder::class);
         $this->call(DependenciasSeeder::class);
+        
     }
 }

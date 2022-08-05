@@ -109,14 +109,14 @@
         </li>
  
         <li class="nav__element nav__element--block">
-                <a href="{{url('/reporte') }}" class="nav__link nav__link--small">
+                <a href="{{route('tecnico.reporte')}}" class="nav__link nav__link--small">
                 <span class="link__icon--margin">
                 <i class="fa-solid fa-chart-column"></i>
                 </span>
                 Reportes
                 </a>
 
-                <a href="{{url('/reporte') }}" class="nav__link-reporte">
+                <a href="{{route('tecnico.reporte')}}" class="nav__link-reporte">
                        Reporte
                   </a>
 

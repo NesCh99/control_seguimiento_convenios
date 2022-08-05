@@ -1,0 +1,19 @@
+#Table__Matriz_filter{
+    display: none!important;
+}
+
+.export{
+ background-color: rgb(13, 202, 240)!important;   
+}
+
+.fixed{
+     width: auto;
+    height: auto;
+    
+
+}
+
+.display__none{
+    display: none!important;
+}
+

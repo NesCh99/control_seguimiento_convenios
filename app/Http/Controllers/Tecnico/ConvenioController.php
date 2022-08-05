@@ -287,6 +287,9 @@ class ConvenioController extends Controller
             $estado = 'Vigente';
         }
 
+
+
+        
         /* Recupera todos los informes del actual convenio*/
         $informes = Informe::where('idConvenio',$convenio->idConvenio)->get();
         
