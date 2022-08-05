@@ -1,5 +1,5 @@
 <nav class="nav__convenio">
-    <img src="/img/logoEspoch.svg" alt="" class="logo">
+    <img src="{{url('img/logoEspoch.svg')}}" alt="" class="logo">
     <ul class="nav__links">
         <li class="nav__element">
             <a href="#" class="nav__link">
