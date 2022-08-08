@@ -49,6 +49,14 @@ $(document).ready( function () {
 } );
 
 $(document).ready( function () {
+  $('#Table__Roles').DataTable({
+      "language":{
+          "url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
+        }
+        });
+} );
+
+$(document).ready( function () {
     $('#Table__Dependencias').DataTable({
         "language":{
             "url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
