@@ -41,21 +41,20 @@
                 @endcan
                 <thead>
                     <tr class="col">
-                        <th>ID</th>
+                        <th>#</th>
                         <th>Clasificación</th>
-                        <th>Fecha de Creación</th>
-                        <th>Fecha de Modificación</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($clasificaciones as $clasificacion)
+                    @foreach($clasificaciones as $numero => $clasificacion)
                         <tr class="row">
-                            <td><b>{{$clasificacion->idClasificacion}}</b></td>
+                            <td>{{$numero + 1}}</td>
                             <td>{{$clasificacion->chaNombreClasificacion}}</td>
-                            <td>{{$clasificacion->tstCreacionClasificacion}}</td>
-                            <td>{{$clasificacion->tstModificacionClasificacion}}</td>
                             <td>
+                            <form action="{{route('admin.clasificaciones.destroy', $clasificacion->idClasificacion)}}" method="POST">
+                            @csrf
+                            @method('DELETE')                               
                                 @can('admin.clasificaciones.show')
                                 <a href="{{route('admin.clasificaciones.show', $clasificacion)}}" class="button__table">
                                     <span class="icon__button--view">
@@ -73,13 +72,14 @@
                                 </a>
                                 @endcan
                                 @can('admin.clasificaciones.destroy')
-                                <button type="button" class="button__table button__table--right">
+                                <button type="submit" class="button__table button__table--right" onclick="return confirm('¿Seguro que deseas eliminar el registro?');">
                                     <span class="icon__button--delete">
                                     <i class="fa-solid fa-trash-can"></i>
                                     </span>
                                     <span class="button__table--spam">Eliminar</span>
                                 </button>
                                 @endcan
+                            </form>
                             </td>
                         </tr>
                     @endforeach

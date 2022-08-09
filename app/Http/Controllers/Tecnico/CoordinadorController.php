@@ -75,7 +75,7 @@ class CoordinadorController extends Controller
             'chaCargoCoordinador' => $request->input('Cargo'),
             'chaCelularCoordinador' => $contacto,
         ]);
-        return redirect()->route('tecnico.coordinadores.edit', $coordinador)->with('info', $coordinador->chaNombreCoordinador.' ha sido registrado con éxito');
+        return redirect()->route('tecnico.coordinadores.edit', $coordinador)->with('info', $coordinador->chaNombreCoordinador.' ha sido registrado con éxito, por favor asigne resoluciones');
     }
 
     /**

@@ -13,7 +13,7 @@ $casprotocol = 'https://';
                Control y Seguimiento de Convenios
             </a>
         </li>
-        
+        @if(phpCAS::isAuthenticated())
         <li class="nav__element nav__element--right nav__element--click">
             <a href="#" class="nav__link">
                {{phpCAS::getUser()}}
@@ -44,5 +44,12 @@ $casprotocol = 'https://';
                <span>Rol:</span>
             </a>
         </li>
+        @else
+        <li class="nav__element nav__element--right nav__element--click">
+            <a href="#" class="nav__link">
+               Iniciar Sesión
+            </a>
+        </li>
+        @endif
     </ul>
 </nav>

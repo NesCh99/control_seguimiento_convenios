@@ -1,6 +1,5 @@
 @extends('layouts.convenios')
 @section('workArea')
-
 <section class="core">
     <div class="content">
         <div class="alert alert-info alert-dismissable mt-2" >

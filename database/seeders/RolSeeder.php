@@ -48,37 +48,37 @@ class RolSeeder extends Seeder
 
         /* Permisos de Gestión de Clasificaciones */
         Permission::create(['name' => 'admin.clasificaciones.index',
-                            'description' => 'Ver Tabla de Clasificaciones',])->syncRoles([$administrador]);
+                            'description' => 'Ver Tabla de Clasificaciones',])->syncRoles([$administrador, $tecnico]);
         Permission::create(['name' => 'admin.clasificaciones.create',
                             'description' => 'Registrar una Nueva Clasificación',])->syncRoles([$administrador]);
         Permission::create(['name' => 'admin.clasificaciones.edit',
                             'description' => 'Editar una Clasificación',])->syncRoles([$administrador]);
         Permission::create(['name' => 'admin.clasificaciones.show',
-                            'description' => 'Mostrar la Información de una Clasificación',])->syncRoles([$administrador]);
+                            'description' => 'Mostrar la Información de una Clasificación',])->syncRoles([$administrador, $tecnico]);
         Permission::create(['name' => 'admin.clasificaciones.destroy',
                             'description' => 'Eliminar el Registro de una Clasificación',])->syncRoles([$administrador]);
 
         /* Permisos de Gestión de Ejes de Accción */
         Permission::create(['name' => 'admin.ejes.index',
-                            'description' => 'Ver Tabla de Ejes',])->syncRoles([$administrador]);
+                            'description' => 'Ver Tabla de Ejes',])->syncRoles([$administrador, $tecnico]);
         Permission::create(['name' => 'admin.ejes.create',
                             'description' => 'Registrar un Nuevo Eje',])->syncRoles([$administrador]);
         Permission::create(['name' => 'admin.ejes.edit',
                             'description' => 'Editar un Eje',])->syncRoles([$administrador]);
         Permission::create(['name' => 'admin.ejes.show',
-                            'description' => 'Mostrar la Información de un Eje',])->syncRoles([$administrador]);
+                            'description' => 'Mostrar la Información de un Eje',])->syncRoles([$administrador, $tecnico]);
         Permission::create(['name' => 'admin.ejes.destroy',
                             'description' => 'Eliminar el Registro de un Eje',])->syncRoles([$administrador]);
 
         /* Permisos de Gestión de Dependencias */
         Permission::create(['name' => 'admin.dependencias.index',
-                            'description' => 'Ver Tabla de Dependencias',])->syncRoles([$administrador]);
+                            'description' => 'Ver Tabla de Dependencias',])->syncRoles([$administrador, $tecnico]);
         Permission::create(['name' => 'admin.dependencias.create',
                             'description' => 'Registrar una Nueva Dependencia',])->syncRoles([$administrador]);
         Permission::create(['name' => 'admin.dependencias.edit',
                             'description' => 'Editar una Dependencia',])->syncRoles([$administrador]);
         Permission::create(['name' => 'admin.dependencias.show',
-                            'description' => 'Mostrar la Información de una Dependencia',])->syncRoles([$administrador]);
+                            'description' => 'Mostrar la Información de una Dependencia',])->syncRoles([$administrador, $tecnico]);
         Permission::create(['name' => 'admin.dependencias.destroy',
                             'description' => 'Eliminar el Registro de una Dependencia',])->syncRoles([$administrador]);
 

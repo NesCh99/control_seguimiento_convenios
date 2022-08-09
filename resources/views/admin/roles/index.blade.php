@@ -40,15 +40,20 @@
                 @endcan
                 <thead>
                     <tr class="col">
+                        <th>#</th>
                         <th>Nombre</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($roles as $rol)
+                    @foreach($roles as $numero => $rol)
                         <tr class="row">
+                            <td>{{$numero + 1}}</td>
                             <td>{{$rol->name}}</td>
                             <td>
+                            <form action="{{route('admin.roles.destroy', $rol->id)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
                                 @can('admin.roles.show')
                                 <a href="{{route('admin.roles.show', $rol)}}" class="button__table">
                                     <span class="icon__button--view">
@@ -66,13 +71,14 @@
                                 </a>
                                 @endcan  
                                 @can('admin.roles.destroy')
-                                <button type="button" class="button__table button__table--right">
+                                <button type="submit" class="button__table button__table--right" onclick="return confirm('¿Seguro que deseas eliminar el registro?');">
                                     <span class="icon__button--delete">
                                     <i class="fa-solid fa-trash-can"></i>
                                     </span>
                                     <span class="button__table--spam">Eliminar</span>
                                 </button>
                                 @endcan
+                            </form>
                             </td>
                         </tr>
                     @endforeach

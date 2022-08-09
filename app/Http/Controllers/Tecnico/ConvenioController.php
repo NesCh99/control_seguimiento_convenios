@@ -241,7 +241,7 @@ class ConvenioController extends Controller
             }
         }
         Informe::insert($informes); 
-        return redirect()->route('tecnico.convenios.edit', $convenio)->with('info', 'El Convenio ha sido registrado con éxito, porfavor asigne resoluciones');
+        return redirect()->route('tecnico.convenios.edit', $convenio)->with('info', 'El Convenio ha sido registrado con éxito, porfavor asigne coordinadores');
     }
 
     /**

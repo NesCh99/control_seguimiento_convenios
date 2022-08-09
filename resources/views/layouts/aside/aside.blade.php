@@ -1,4 +1,5 @@
 <!-- Plantilla del Menu Lateral -->
+@if(phpCAS::isAuthenticated())
 <nav class="nav__convenio">
         <div class="nav__expand">
                 <span class="expand__icon expand__icon--click">
@@ -153,3 +154,4 @@
         @endcan
     </ul>
 </nav>
+@endif

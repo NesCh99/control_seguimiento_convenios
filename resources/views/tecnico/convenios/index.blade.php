@@ -42,18 +42,20 @@
                 @endcan
                 <thead>
                     <tr class="col">
+                        <th>#</th>
                         <th>Resolución</th>
                         <th>Convenio</th>
                         <th>Objeto del Convenio</th>
                         <th>Coordinador</th>
                         <th>Estado</th>
-                        <th>Legalización y Vigencia</th>
+                        <th>Suscripción y Vigencia</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($convenios as $convenio)
+                    @foreach($convenios as $numero => $convenio)
                         <tr class="row">
+                            <td>{{$numero + 1}}</td>
                             <td><b>{{$convenio->Resolucion}}</b></td>
                             <td>{{$convenio->texNombreConvenio}}
                             <td>{{$convenio->texObjetoConvenio}}</td>
@@ -90,7 +92,7 @@
                             @endif
                             </td>
                             <td>{{$convenio->Estado}}</td>
-                            <td>Legalizado
+                            <td>Suscrito
                                 <br>
                                 {{$convenio->datFechaInicioConvenio}}
                                 <br>

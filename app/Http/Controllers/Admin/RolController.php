@@ -113,8 +113,10 @@ class RolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idRol)
     {
-        //
+        $rol = Role::findOrFail($idRol);
+        $rol->delete();
+        return redirect()->route('admin.roles.index')->with('info', $rol->name.' ha sido eliminado con éxito');
     }
 }

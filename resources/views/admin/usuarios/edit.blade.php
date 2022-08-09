@@ -6,7 +6,7 @@
             Administración de Usuarios.
         </span>
         <span class="core__title--small">
-            Agregar Usuario
+            Editar Usuario
         </span>
     </div>
     <div class="core__content">
