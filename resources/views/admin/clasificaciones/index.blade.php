@@ -29,6 +29,7 @@
         </div>
         <div class="content__table">
             <table class="tabla display" id="Table__Clasificaciones">
+                @can('admin.clasificaciones.create')
                 <div class="button">
                     <a href="{{route('admin.clasificaciones.create')}}" class="nav__link nav__link--small">
                         <span class="link__icon--margin">
@@ -37,6 +38,7 @@
                         Nuevo
                     </a>
                 </div>
+                @endcan
                 <thead>
                     <tr class="col">
                         <th>ID</th>
@@ -54,24 +56,30 @@
                             <td>{{$clasificacion->tstCreacionClasificacion}}</td>
                             <td>{{$clasificacion->tstModificacionClasificacion}}</td>
                             <td>
+                                @can('admin.clasificaciones.show')
                                 <a href="{{route('admin.clasificaciones.show', $clasificacion)}}" class="button__table">
                                     <span class="icon__button--view">
                                     <i class="fa-solid fa-eye"></i>
                                     </span>
                                     <span class="button__table--spam">Ver</span>
-                                </a>                                
+                                </a> 
+                                @endcan      
+                                @can('admin.clasificaciones.edit')
                                 <a href="{{url('/admin/clasificaciones/'.$clasificacion->idClasificacion.'/edit')}}" class="button__table button__table--right">
                                     <span class="icon__button--update">
                                     <i class="fa-solid fa-pen"></i>
                                     </span>
                                     <span class="button__table--spam">Actualizar</span>
                                 </a>
+                                @endcan
+                                @can('admin.clasificaciones.destroy')
                                 <button type="button" class="button__table button__table--right">
                                     <span class="icon__button--delete">
                                     <i class="fa-solid fa-trash-can"></i>
                                     </span>
                                     <span class="button__table--spam">Eliminar</span>
                                 </button>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

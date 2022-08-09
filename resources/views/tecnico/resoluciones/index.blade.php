@@ -29,6 +29,7 @@
         </div>
         <div class="content__table">
             <table class="tabla display" id="Table__Resoluciones">
+                @can('tecnico.resoluciones.create')
                 <div class="button">
                     <a href="{{route('tecnico.resoluciones.create')}}" class="nav__link nav__link--small">
                         <span class="link__icon--margin">
@@ -37,6 +38,7 @@
                         Nuevo
                     </a>
                 </div>
+                @endcan
                 <thead>
                     <tr class="col">
                         <th>ID</th>
@@ -56,24 +58,30 @@
                             <td>Oficio</td>
                             @endif
                             <td>
+                                @can('tecnico.resoluciones.show')
                                 <a href="{{route('tecnico.resoluciones.show', $resolucion)}}" class="button__table">
                                     <span class="icon__button--view">
                                     <i class="fa-solid fa-eye"></i>
                                     </span>
                                     <span class="button__table--spam">Ver</span>
                                 </a>
+                                @endcan 
+                                @can('tecnico.resoluciones.edit')
                                 <a href="{{url('/tecnico/resoluciones/'.$resolucion->idResolucion.'/edit')}}" class="button__table button__table--right">
                                     <span class="icon__button--update">
                                     <i class="fa-solid fa-pen"></i>
                                     </span>
                                     <span class="button__table--spam">Actualizar</span>
-                                </a>   
+                                </a> 
+                                @endcan  
+                                @can('tecnico.resoluciones.destroy')
                                 <button type="button" class="button__table  button__table button__table--right">
                                     <span class="icon__button--delete">
                                     <i class="fa-solid fa-trash-can"></i>
                                     </span>
                                     <span class="button__table--spam">Eliminar</span>
                                 </button>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

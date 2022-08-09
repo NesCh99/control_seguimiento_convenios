@@ -14,6 +14,14 @@ use function PHPUnit\Framework\isNull;
 
 class ResolucionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:tecnico.resoluciones.index')->only('index');
+        $this->middleware('can:tecnico.resoluciones.create')->only('create');
+        $this->middleware('can:tecnico.resoluciones.edit')->only('edit');
+        $this->middleware('can:tecnico.resoluciones.show')->only('show');
+        $this->middleware('can:tecnico.resoluciones.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

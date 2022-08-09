@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\DB;
 
 class ReporteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:tecnico.reporte')->only('index');
+    }
     /**
      * Display a listing of the resource.
      *

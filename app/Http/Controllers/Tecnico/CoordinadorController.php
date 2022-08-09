@@ -12,6 +12,14 @@ use function PHPUnit\Framework\isNull;
 
 class CoordinadorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:tecnico.coordinadores.index')->only('index');
+        $this->middleware('can:tecnico.coordinadores.create')->only('create');
+        $this->middleware('can:tecnico.coordinadores.edit')->only('edit');
+        $this->middleware('can:tecnico.coordinadores.show')->only('show');
+        $this->middleware('can:tecnico.coordinadores.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

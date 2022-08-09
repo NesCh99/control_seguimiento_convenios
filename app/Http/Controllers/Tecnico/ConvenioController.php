@@ -18,6 +18,14 @@ use function PHPUnit\Framework\isNull;
 
 class ConvenioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:tecnico.convenios.index')->only('index');
+        $this->middleware('can:tecnico.convenios.create')->only('create');
+        $this->middleware('can:tecnico.convenios.edit')->only('edit');
+        $this->middleware('can:tecnico.convenios.show')->only('show');
+        $this->middleware('can:tecnico.convenios.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

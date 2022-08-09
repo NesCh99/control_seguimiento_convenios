@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class EjeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:admin.ejes.index')->only('index');
+        $this->middleware('can:admin.ejes.create')->only('create');
+        $this->middleware('can:admin.ejes.edit')->only('edit');
+        $this->middleware('can:admin.ejes.show')->only('show');
+        $this->middleware('can:admin.ejes.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

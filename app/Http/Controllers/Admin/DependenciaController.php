@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class DependenciaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:admin.dependencias.index')->only('index');
+        $this->middleware('can:admin.dependencias.create')->only('create');
+        $this->middleware('can:admin.dependencias.edit')->only('edit');
+        $this->middleware('can:admin.dependencias.show')->only('show');
+        $this->middleware('can:admin.dependencias.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

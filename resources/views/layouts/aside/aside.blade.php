@@ -22,18 +22,35 @@
 
         <!-- Opciones de Administración -->
 
+        @can('admin.usuarios.index')
         <li class="nav__element nav__element--block">
-                <a href="{{url('/usuarios') }}" class="nav__link nav__link--small">
+                <a href="{{route('admin.usuarios.index')}}" class="nav__link nav__link--small">
                 <span class="link__icon--margin">
                 <i class="fa-solid fa-user-group"></i>
                 </span>
                  Usuarios
                 </a>
-                <a href="{{url('/usuarios') }}" class="nav__link-usuario">
+                <a href="{{route('admin.usuarios.index')}}" class="nav__link-usuario">
                         Usuarios
                 </a>
         </li>
+        @endcan
 
+        @can('admin.roles.index')
+        <li class="nav__element nav__element--block">
+                <a href="{{route('admin.roles.index')}}" class="nav__link nav__link--small">
+                <span class="link__icon--margin">
+                <i class="fa-solid fa-user-shield"></i>
+                </span>
+                 Roles
+                </a>
+                <a href="{{route('admin.roles.index')}}" class="nav__link-rol">
+                        Roles
+                </a>
+        </li>
+        @endcan
+
+        @can('admin.clasificaciones.index')
         <li class="nav__element nav__element--block">
                 <a href="{{route('admin.clasificaciones.index')}}" class="nav__link nav__link--small">
                 <span class="link__icon--margin">
@@ -45,7 +62,9 @@
                         Clasificaciones
                 </a>
         </li>
+        @endcan
 
+        @can('admin.ejes.index')
         <li class="nav__element nav__element--block">
                 <a href="{{route('admin.ejes.index')}}" class="nav__link nav__link--small">
                 <span class="link__icon--margin">
@@ -57,7 +76,9 @@
                         Ejes de Acción
                 </a>
         </li>
+        @endcan
 
+        @can('admin.dependencias.index')
         <li class="nav__element nav__element--block">
                 <a href="{{route('admin.dependencias.index')}}" class="nav__link nav__link--small">
                 <span class="link__icon--margin">
@@ -69,7 +90,9 @@
                         Dependencias
                 </a>
         </li>
+        @endcan
 
+        @can('tecnico.resoluciones.index')
         <!-- Opciones de Técnico de Convenios -->
         <li class="nav__element nav__element--block">
                 <a href="{{route('tecnico.resoluciones.index')}}" class="nav__link nav__link--small">
@@ -82,7 +105,9 @@
                        Resoluciones
                 </a>
         </li>
+        @endcan
 
+        @can('tecnico.coordinadores.index')
         <li class="nav__element nav__element--block">
                 <a href="{{route('tecnico.coordinadores.index')}}" class="nav__link nav__link--small">
                 <span class="link__icon--margin">
@@ -94,7 +119,9 @@
                        Coordinadores
                 </a>
         </li>
+        @endcan
 
+        @can('tecnico.convenios.index')
         <li class="nav__element nav__element--block">
                 <a href="{{route('tecnico.convenios.index')}}" class="nav__link nav__link--small">
                 <span class="link__icon--margin">
@@ -107,7 +134,9 @@
                       Convenios
                    </a>
         </li>
- 
+        @endcan
+
+        @can('tecnico.reporte')
         <li class="nav__element nav__element--block">
                 <a href="{{route('tecnico.reporte')}}" class="nav__link nav__link--small">
                 <span class="link__icon--margin">
@@ -121,5 +150,6 @@
                   </a>
 
         </li>
+        @endcan
     </ul>
 </nav>

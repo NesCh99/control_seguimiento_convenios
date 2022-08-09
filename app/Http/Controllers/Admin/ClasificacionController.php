@@ -8,20 +8,22 @@ use Illuminate\Http\Request;
 
 class ClasificacionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:admin.clasificaciones.index')->only('index');
+        $this->middleware('can:admin.clasificaciones.create')->only('create');
+        $this->middleware('can:admin.clasificaciones.edit')->only('edit');
+        $this->middleware('can:admin.clasificaciones.show')->only('show');
+        $this->middleware('can:admin.clasificaciones.destroy')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
-        if($request->input('search')){
-            $search = '%'.$request->input('search').'%';
-            $clasificaciones = Clasificacion::where('chaNombreClasificacion', 'like', $search)->get();
-            
-        }else{
-            $clasificaciones = Clasificacion::all();
-        }
+    public function index()
+    {        
+        $clasificaciones = Clasificacion::all();
         
         return view('admin.clasificaciones.index', compact('clasificaciones'));
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,9 @@ Route::get('/', function () {
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/logout', function()
+{
+    session_destroy();
+    Auth::logout();
+    return redirect()->route('home');
+})->name('logout');

@@ -29,6 +29,7 @@
         </div>
         <div class="content__table">
             <table class="tabla display" id="Table__Dependencias">
+                @can('admin.dependencias.create')
                 <div class="button">
                     <a href="{{route('admin.dependencias.create')}}" class="nav__link nav__link--small">
                         <span class="link__icon--margin">
@@ -37,6 +38,7 @@
                         Nuevo
                     </a>
                 </div>
+                @endcan
                 <thead>
                     <tr class="col">
                         <th>ID</th>
@@ -54,24 +56,30 @@
                             <td>{{$dependencia->tstCreacionDependencia}}</td>
                             <td>{{$dependencia->tstModificacionDependencia}}</td>
                             <td>
+                                @can('admin.dependencias.show')
                                 <a href="{{route('admin.dependencias.show', $dependencia)}}" class="button__table">
                                     <span class="icon__button--view">
                                     <i class="fa-solid fa-eye"></i>
                                     </span>
                                     <span class="button__table--spam">Ver</span>
                                 </a>
+                                @endcan
+                                @can('admin.dependencias.edit')
                                 <a href="{{url('/admin/dependencias/'.$dependencia->idDependencia.'/edit')}}" class="button__table button__table--right">
                                     <span class="icon__button--update">
                                     <i class="fa-solid fa-pen"></i>
                                     </span>
                                     <span class="button__table--spam">Actualizar</span>
-                                </a>   
+                                </a> 
+                                @endcan
+                                @can('admin.dependencias.destroy')
                                 <button type="button" class="button__table  button__table button__table--right">
                                     <span class="icon__button--delete">
                                     <i class="fa-solid fa-trash-can"></i>
                                     </span>
                                     <span class="button__table--spam">Eliminar</span>
                                 </button>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
