@@ -18,6 +18,9 @@ class UsuarioSeeder extends Seeder
             'email' => 'nestor.chela@espoch.edu.ec'
         ])->assignRole('Administrador');
         User::create([
+            'email' => 'klever.castillo@espoch.edu.ec'
+        ])->assignRole('Administrador');
+        User::create([
             'email' => 'talia.zarate@espoch.edu.ec'
         ])->assignRole('Tecnico de Convenios');
     }
