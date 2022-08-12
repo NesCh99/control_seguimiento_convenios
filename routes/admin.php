@@ -2,12 +2,10 @@
 
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\ClasificacionController;
-use App\Http\Controllers\Admin\CoordinadorController;
 use App\Http\Controllers\Admin\DependenciaController;
 use App\Http\Controllers\Admin\EjeController;
 use App\Http\Controllers\Admin\RolController;
 use App\Http\Controllers\Admin\UsuarioController;
-use App\Models\Coordinador;
 use Illuminate\Support\Facades\Route;
 
 /*

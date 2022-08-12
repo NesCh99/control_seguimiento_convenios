@@ -22,6 +22,14 @@ class RolSeeder extends Seeder
 
         /* Creción de Permisos del sistema con el framework Laravel/Spatie */
 
+        /* Permisos para ver las vistas de inicio de cada rol */
+        Permission::create(['name' => 'admin.home',
+                            'description' => 'Ver el Inicio del Administrador',])->syncRoles([$administrador]);
+        Permission::create(['name' => 'tecnico.home',
+                            'description' => 'Ver el Inicio del Técnico de Convenios',])->syncRoles([$tecnico]);
+        Permission::create(['name' => 'auditor.home',
+                            'description' => 'Ver el Inicio del Auditor',])->syncRoles([$auditor]);
+                            
         /* Permisos de Gestión de Usuarios */
         Permission::create(['name' => 'admin.usuarios.index',
                             'description' => 'Ver Tabla de Usuarios',])->syncRoles([$administrador]);

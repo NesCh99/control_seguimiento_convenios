@@ -9,7 +9,7 @@ $casprotocol = 'https://';
     <img src="{{url('img/logoEspoch.svg')}}" alt="" class="logo">
     <ul class="nav__links">
         <li class="nav__element">
-            <a href="#" class="nav__link">
+            <a href="{{route('home')}}" class="nav__link">
                Control y Seguimiento de Convenios
             </a>
         </li>
@@ -34,20 +34,22 @@ $casprotocol = 'https://';
                 </nav> 
             </div>
         </li>
-        <li class="nav__element nav__element--right nav__element--rol">
-            <a href="#" class="nav__link">
-              <span>{{str_replace(array('"', '[', ']'),'',auth()->user()->getRoleNames())}}</span>
-            </a>
-        </li>
+            @if(Auth::check())
+            <li class="nav__element nav__element--right nav__element--rol">
+                <a href="#" class="nav__link">
+                <span>{{auth()->user()->getRoleNames()->first()}}</span>
+                </a>
+            </li>
+            @else
+            <li class="nav__element nav__element--right nav__element--rol">
+                <a href="#" class="nav__link">
+                <span>Visitante</span>
+                </a>
+            </li>
+            @endif
         <li class="nav__element nav__element--right">
             <a href="#" class="nav__link">
-               <span>Rol:</span>
-            </a>
-        </li>
-        @else
-        <li class="nav__element nav__element--right nav__element--click">
-            <a href="#" class="nav__link">
-               Iniciar Sesión
+            <span>Rol:</span>
             </a>
         </li>
         @endif

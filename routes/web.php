@@ -22,8 +22,7 @@ Route::get('/', function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');//->withoutMiddleware([CASAuth::class]);
 Route::get('/logout', function()
-{
-    session_destroy();
+{    
     Auth::logout();
-    return redirect()->route('home');
+    phpCAS::logoutWithRedirectService(route('home')); 
 })->name('logout');

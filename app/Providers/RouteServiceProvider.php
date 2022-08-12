@@ -51,7 +51,7 @@ class RouteServiceProvider extends ServiceProvider
              * Ruta personalizada para la parte del administrador
              * Sin esta ruta Laravel no reconoce el archivo admin.php
              */
-            Route::middleware('web') //agregar auth despues de web si se desea que se autorice el ingreso a esas rutas
+            Route::middleware('admin')
                 ->prefix('admin') //prefijo para que todas las rutas empiezen con admin/
                 ->namespace($this->namespace)
                 ->group(base_path('routes/admin.php'));
@@ -60,10 +60,19 @@ class RouteServiceProvider extends ServiceProvider
              * Ruta personalizada para la parte del tecnico
              * Sin esta ruta Laravel no reconoce el archivo tecnico.php
              */
-            Route::middleware('web') //agregar auth despues de web si se desea que se autorice el ingreso a esas rutas
+            Route::middleware('tecnico')
             ->prefix('tecnico') //prefijo para que todas las rutas empiezen con tecnico/
             ->namespace($this->namespace)
             ->group(base_path('routes/tecnico.php'));
+
+            /**
+             * Ruta personalizada para la parte del auditor
+             * Sin esta ruta Laravel no reconoce el archivo auditor.php
+             */
+            Route::middleware('auditor')
+            ->prefix('auditor') //prefijo para que todas las rutas empiezen con auditor/
+            ->namespace($this->namespace)
+            ->group(base_path('routes/auditor.php'));
         });
     }
 

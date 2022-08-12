@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Convenio;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use phpCAS;
@@ -17,81 +18,66 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {        
-        /* if(phpCAS::isAuthenticated() && Auth::check()){
+    {      
+        /**
+         * Verifica si el usuario esta autenticado en el CAS y en el Sistema, para despues
+         * reenviar según su rol, al inicio predeterminado para cada uno
+         * Si el usuario no pertenece a los registros de usuarios de la base de datos del sistema
+         * se lo reenvia al inicio de visitantes, con la información de los convenios vigentes
+         */
+        if(phpCAS::isAuthenticated() && Auth::check()){
             $user = Auth::user();
-            if($user){
-
+            $rol = $user->getRoleNames()->first();
+            switch ($rol) {
+                case "Administrador":
+                    return redirect()->route('admin.home');
+                break;
+                case "Tecnico de Convenios":
+                    return redirect()->route('tecnico.home');
+                break;
+                case "Auditor":
+                    return redirect()->route('auditor.home');
+                break;
             }
         }else{
-            return view('home');
-        } */
-        return redirect()->route('tecnico.home');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            $convenios = Convenio::where('datFechaFinConvenio','<=',date('Y-m-d'));
+            $fecha2 = new DateTime();
+            $i=0;
+            foreach($convenios as $convenio){
+                $coordinadorActual = $convenio->Coordinadores()->wherePivot('chaTipoCoordinador','Coordinador')->wherePivot('chaEstadoCoordinador','Activo')->get();
+                $delegadoActual = $convenio->Coordinadores()->wherePivot('chaTipoCoordinador','Delegado')->wherePivot('chaEstadoCoordinador','Activo')->get();
+                if(count($coordinadorActual)!=0){
+                    $convenio['Coordinador'] = $coordinadorActual[0];
+                    
+                }else{
+                    $convenio['Coordinador'] = null;
+                }
+                if(count($delegadoActual)!=0){
+                    $convenio['Delegado'] = $delegadoActual[0];
+                }else{
+                    $convenio['Delegado'] = null;
+                }
+                
+                $convenio['Resolucion'] = $convenio->resolucion->chaNombreResolucion;
+                $inicio = new DateTime($convenio->datFechaInicioConvenio);
+                if(is_Null($convenio->datFechaFinConvenio)){
+                    $convenio['datFechaFinConvenio'] = 'Indeterminado';
+                    $convenio['Vigencia'] = 'Indeterminado';
+                }else{
+                    $fecha1 = new DateTime($convenio->datFechaFinConvenio);  
+                    $meses = $fecha2->diff($fecha1)->format('%r%y') * 12;
+                    $vigenciaAños = $inicio->diff(new DateTime($convenio->datFechaFinConvenio))->format('%r%y');
+                    $vigenciaMeses = $inicio->diff(new DateTime($convenio->datFechaFinConvenio))->format('%r%m');
+                    if($vigenciaMeses == 0){
+                        $convenio['Vigencia'] = $vigenciaAños.' años ';
+                    }else{
+                        $convenio['Vigencia'] = $vigenciaAños.' años '.$vigenciaMeses. ' meses';
+                    }
+                }
+                $convenios[$i] = $convenio;
+                $i++;
+            }
+            return view('index', compact('convenios'));
+        } 
     }
 }
