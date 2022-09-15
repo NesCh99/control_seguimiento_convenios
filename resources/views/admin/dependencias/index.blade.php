@@ -41,20 +41,16 @@
                 @endcan
                 <thead>
                     <tr class="col">
-                        <th>ID</th>
+                        <th>#</th>
                         <th>Dependencia</th>
-                        <th>Fecha de Creación</th>
-                        <th>Fecha de Modificación</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($dependencias as $dependencia)
+                    @foreach($dependencias as $numero => $dependencia)
                         <tr class="row">
-                            <td>{{$dependencia->idDependencia}}</td>
+                            <td>{{$numero + 1}}</td>
                             <td>{{$dependencia->vchNombreDependencia}}</td>
-                            <td>{{$dependencia->tstCreacionDependencia}}</td>
-                            <td>{{$dependencia->tstModificacionDependencia}}</td>
                             <td>
                                 @can('admin.dependencias.show')
                                 <a href="{{route('admin.dependencias.show', $dependencia)}}" class="button__table">

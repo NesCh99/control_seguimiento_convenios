@@ -66,6 +66,7 @@ class ClasificacionController extends Controller
     {
         $clasificacion = Clasificacion::find($idClasificacion);
         $convenios = $clasificacion->convenios;
+        $band = $clasificacion->chaNombreClasificacion; //variable que lleva el nombre de la clasificacion a la vista de convenios
         $fecha2 = new DateTime();
         $i=0;
         foreach($convenios as $convenio){
@@ -111,7 +112,7 @@ class ClasificacionController extends Controller
             $convenios[$i] = $convenio;
             $i++;
         }
-        return view('admin.clasificaciones.show', compact(['clasificacion', 'convenios']));
+        return view('tecnico.convenios.index', compact('convenios', 'band'));
     }
 
     /**

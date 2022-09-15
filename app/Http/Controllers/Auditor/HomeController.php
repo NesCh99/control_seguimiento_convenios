@@ -20,7 +20,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $convenios = Convenio::where('datFechaFinConvenio','<=',date('Y-m-d'));
+        $convenios = Convenio::where('datFechaFinConvenio','>=', date('Y-m-d'))->get();
         $fecha2 = new DateTime();
         $i=0;
         foreach($convenios as $convenio){

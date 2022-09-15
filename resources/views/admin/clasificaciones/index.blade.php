@@ -60,7 +60,7 @@
                                     <span class="icon__button--view">
                                     <i class="fa-solid fa-eye"></i>
                                     </span>
-                                    <span class="button__table--spam">Ver</span>
+                                    <span class="button__table--spam">Ver Convenios</span>
                                 </a> 
                                 @endcan      
                                 @can('admin.clasificaciones.edit')

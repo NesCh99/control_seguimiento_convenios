@@ -23,9 +23,15 @@
             <span class="label__number">
                 1
             </span>
+            @if(is_null($band) == false)
+            <span class="label__text">
+                Convenios de {{$band}}
+            </span>
+            @else
             <span class="label__text">
                 Convenios
             </span>
+            @endif
         </div>
         
         <div class="content__table">
@@ -102,6 +108,9 @@
                                 {{$convenio->Vigencia}}
                             </td>
                             <td>
+                            <form action="{{route('tecnico.convenios.destroy', $convenio->idConvenio)}}" method="POST">
+                            @csrf
+                            @method('DELETE') 
                                 @can('tecnico.convenios.show')
                                 <a href="{{route('tecnico.convenios.show', $convenio)}}" class="button__table">
                                     <span class="icon__button--view">
@@ -119,13 +128,14 @@
                                 </a>
                                 @endcan 
                                 @can('tecnico.convenios.destroy')
-                                <button type="button" class="button__table button__table--right">
+                                <button type="submit" class="button__table button__table--right" onclick="return confirm('¿Seguro que deseas eliminar el registro?');">
                                     <span class="icon__button--delete">
                                     <i class="fa-solid fa-trash-can"></i>
                                     </span>
                                     <span class="button__table--spam">Eliminar</span>
                                 </button>
                                 @endcan 
+                            </form>
                             </td>
                         </tr>
                     @endforeach

@@ -1159,6 +1159,9 @@ p{
 .wrapper__row-1{
     grid-template-columns: 1fr;
 }
+.wrapper__row-2{
+    grid-template-columns: 1fr 1fr;
+}
 
 /*Button*/
 .button--plus{

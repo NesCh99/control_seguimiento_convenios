@@ -41,16 +41,16 @@
                 @endcan
                 <thead>
                     <tr class="col">
-                        <th>ID</th>
+                        <th>#</th>
                         <th>Resolucion</th>
                         <th>Tipo</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($resoluciones as $resolucion)
+                    @foreach($resoluciones as $numero => $resolucion)
                         <tr class="row">
-                            <td>{{$resolucion->idResolucion}}</td>
+                            <td>{{$numero + 1}}</td>
                             <td>{{$resolucion->chaNombreResolucion}}</td>
                             @if($resolucion->sinTipoResolucion == 1)
                             <td>Resolución</td>
@@ -63,7 +63,7 @@
                                     <span class="icon__button--view">
                                     <i class="fa-solid fa-eye"></i>
                                     </span>
-                                    <span class="button__table--spam">Ver</span>
+                                    <span class="button__table--spam">Ver Convenios</span>
                                 </a>
                                 @endcan 
                                 @can('tecnico.resoluciones.edit')
@@ -75,7 +75,7 @@
                                 </a> 
                                 @endcan  
                                 @can('tecnico.resoluciones.destroy')
-                                <button type="button" class="button__table  button__table button__table--right">
+                                <button type="submit" class="button__table  button__table button__table--right" onclick="return confirm('¿Seguro que deseas eliminar el registro?');">
                                     <span class="icon__button--delete">
                                     <i class="fa-solid fa-trash-can"></i>
                                     </span>

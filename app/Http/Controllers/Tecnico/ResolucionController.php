@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Convenio;
 use App\Models\Coordinador;
 use App\Models\Resolucion;
+use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -72,7 +73,54 @@ class ResolucionController extends Controller
     public function show($id)
     {
         $resolucion = Resolucion::find($id);
-        return view('tecnico.resoluciones.show', compact('resolucion'));
+        $convenios = $resolucion->convenios;
+        $band = $resolucion->chaNombreResolucion;
+        $fecha2 = new DateTime();
+        $i=0;
+        foreach($convenios as $convenio){
+            $coordinadorActual = $convenio->Coordinadores()->wherePivot('chaTipoCoordinador','Coordinador')->wherePivot('chaEstadoCoordinador','Activo')->get();
+            $delegadoActual = $convenio->Coordinadores()->wherePivot('chaTipoCoordinador','Delegado')->wherePivot('chaEstadoCoordinador','Activo')->get();
+            if(count($coordinadorActual)!=0){
+                $convenio['Coordinador'] = $coordinadorActual[0];
+                
+            }else{
+                $convenio['Coordinador'] = null;
+            }
+            if(count($delegadoActual)!=0){
+                $convenio['Delegado'] = $delegadoActual[0];
+            }else{
+                $convenio['Delegado'] = null;
+            }
+            
+            $convenio['Resolucion'] = $convenio->resolucion->chaNombreResolucion;
+            $inicio = new DateTime($convenio->datFechaInicioConvenio);
+            if(is_Null($convenio->datFechaFinConvenio)){
+                $estado = 'Vigente';
+                $convenio['datFechaFinConvenio'] = 'Indeterminado';
+                $convenio['Vigencia'] = 'Indeterminado';
+            }else{
+                $fecha1 = new DateTime($convenio->datFechaFinConvenio);  
+                $meses = $fecha2->diff($fecha1)->format('%r%y') * 12;
+                if($convenio->datFechaFinConvenio <= date('Y-m-d')){
+                    $estado = 'Caducado';
+                }else if($meses > 0){
+                    $estado = 'Vigente';
+                }else if($meses >= 0 && $meses <= 6){
+                    $estado = 'Vigente - Por Caducar';
+                }
+                $vigenciaAños = $inicio->diff(new DateTime($convenio->datFechaFinConvenio))->format('%r%y');
+                $vigenciaMeses = $inicio->diff(new DateTime($convenio->datFechaFinConvenio))->format('%r%m');
+                if($vigenciaMeses == 0){
+                    $convenio['Vigencia'] = $vigenciaAños.' años ';
+                }else{
+                    $convenio['Vigencia'] = $vigenciaAños.' años '.$vigenciaMeses. ' meses';
+                }
+            }
+            $convenio['Estado'] = $estado;
+            $convenios[$i] = $convenio;
+            $i++;
+        }
+        return view('tecnico.convenios.index', compact('convenios', 'band'));
     }
 
     /**

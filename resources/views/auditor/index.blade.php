@@ -11,15 +11,27 @@
         </span>
     </div> 
     <div class="core__content" style="height: 85%;">
-        <!-- <div class="content__label">
-            <span class="label__number">
-                1
-            </span>
-            <span class="label__text">
-                Convenios
-            </span>
-        </div> -->
         <div class="content__table" style="margin-top: 10px; height: 90%;">
+            <div class="labelFecha" style="height: fit-content; margin-bottom: 2em;">
+                <span>
+                    <h5>
+                        Filtrar Desde
+                    </h5>
+                </span>
+            </div>
+            <div class="fecha" style="height: fit-content; margin-bottom: 2em;"> 
+                <input class="input form-control" type="text" id="min" name="min">
+            </div>
+            <div class="labelFecha" style="height: fit-content; margin-bottom: 2em;">
+                <span>
+                    <h5>
+                         Hasta
+                    </h5>
+                </span>
+            </div>
+            <div class="fecha" style="height: fit-content; margin-bottom: 2em;">
+                <input class="input form-control" type="text" id="max" name="max">
+            </div>
             <table class="tabla display" id="Table__Convenios">
                 <thead>
                     <tr class="col">
@@ -28,7 +40,8 @@
                         <th>Convenio</th>
                         <th>Objeto del Convenio</th>
                         <th>Coordinador</th>
-                        <th>Suscripción y Vigencia</th>
+                        <th>Suscripción</th>
+                        <th>Vigencia</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -71,17 +84,14 @@
                                 </a>                                 
                             @endif
                             </td>
-                            <td>Suscrito
-                                <br>
-                                {{$convenio->datFechaInicioConvenio}}
-                                <br>
-                                <br>
-                                Vigencia
-                                <br>
+                            <td>
+                            {{$convenio->datFechaInicioConvenio}}
+                            </td>
+                            <td>
                                 {{$convenio->Vigencia}}
                             </td>
                             <td>
-                                <a href="{{route('tecnico.convenios.show', $convenio)}}" class="button__table">
+                                <a href="{{route('auditor.convenios.show', $convenio)}}" class="button__table">
                                     <span class="icon__button--view">
                                     <i class="fa-solid fa-eye"></i>
                                     </span>
@@ -95,4 +105,53 @@
         </div>
     </div>
 </section>
+@endsection
+@section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css">
+@endsection
+
+@section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+<script src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
+<script>
+    var minDate, maxDate;
+ 
+ // Custom filtering function which will search data in column four between two values
+ $.fn.dataTable.ext.search.push(
+     function( settings, data, dataIndex ) {
+         var min = minDate.val();
+         var max = maxDate.val();
+         var date = new Date( data[5] );
+  
+         if (
+             ( min === null && max === null ) ||
+             ( min === null && date <= max ) ||
+             ( min <= date   && max === null ) ||
+             ( min <= date   && date <= max )
+         ) {
+             return true;
+         }
+         return false;
+     }
+ );
+  
+ $(document).ready(function() {
+     // Create date inputs
+     minDate = new DateTime($('#min'), {
+         format: 'MMMM Do YYYY'
+     });
+     maxDate = new DateTime($('#max'), {
+         format: 'MMMM Do YYYY'
+     });
+  
+     // DataTables initialisation
+     var table = $('#Table__Convenios').DataTable();
+  
+     // Refilter the table
+     $('#min, #max').on('change', function () {
+        table.draw();
+     });
+ });
+</script>
 @endsection

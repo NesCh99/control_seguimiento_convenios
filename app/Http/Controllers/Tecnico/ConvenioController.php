@@ -35,6 +35,7 @@ class ConvenioController extends Controller
     {
         $convenios = Convenio::all();
         $fecha2 = new DateTime();
+        $band = null; //Variable bandera que lleva el nombre de cualquier clasificacion en la que se encuentren los convenios, siempre es null en este controller
         $i=0;
         foreach($convenios as $convenio){
             $coordinadorActual = $convenio->Coordinadores()->wherePivot('chaTipoCoordinador','Coordinador')->wherePivot('chaEstadoCoordinador','Activo')->get();
@@ -79,7 +80,8 @@ class ConvenioController extends Controller
             $convenios[$i] = $convenio;
             $i++;
         }
-        return view('tecnico.convenios.index', compact('convenios'));
+        
+        return view('tecnico.convenios.index', compact('convenios', 'band'));
     }
 
     /**
@@ -533,9 +535,11 @@ class ConvenioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idConvenio)
     {
-        //
+        $convenio = Convenio::findOrFail($idConvenio);
+        $convenio->delete();
+        return redirect()->route('tecnico.convenios.index', $convenio)->with('info', 'El Convenio '.$convenio->texNombreConvenio.' ha sido eliminado con éxito');
     }
 
     /* Funcion que asigna coordinadores a los convenios */

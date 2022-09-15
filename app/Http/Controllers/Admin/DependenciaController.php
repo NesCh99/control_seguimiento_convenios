@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dependencia;
+use DateTime;
 use Illuminate\Http\Request;
 
 class DependenciaController extends Controller
@@ -63,8 +64,10 @@ class DependenciaController extends Controller
      */
     public function show($idDependencia)
     {
-        $dependencia =  Dependencia::find($idDependencia);
-        return view('admin.dependencias.show', compact('dependencia'));
+        $dependencia = Dependencia::findOrFail($idDependencia);
+        $coordinadores = $dependencia->coordinadores;
+        return view('tecnico.coordinadores.index', compact('coordinadores'));
+        
     }
 
     /**
@@ -105,8 +108,10 @@ class DependenciaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idDependencia)
     {
-        //
+        $dependencia = Dependencia::findOrFail($idDependencia);
+        $dependencia->delete();
+        return redirect()->route('admin.dependencias.index')->with('info',$dependencia->chaNombreDependencia.' ha sido eliminado con éxito');
     }
 }

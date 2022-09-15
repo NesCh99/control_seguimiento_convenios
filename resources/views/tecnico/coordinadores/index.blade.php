@@ -41,6 +41,7 @@
                 @endcan
                 <thead>
                     <tr class="col">
+                        <th>#</th>
                         <th>Dependencia</th>
                         <th>Cargo</th>
                         <th>Coordinador</th>
@@ -50,8 +51,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($coordinadores as $coordinador)
+                    @foreach($coordinadores as $numero => $coordinador)
                         <tr class="row">
+                            <td>{{$numero + 1}}</td>
                             <td>{{$coordinador->dependencia->vchNombreDependencia}}</td>
                             <td>{{$coordinador->chaCargoCoordinador}}</td>
                             <td>{{$coordinador->chaTituloCoordinador.' '.$coordinador->chaNombreCoordinador}}</td>

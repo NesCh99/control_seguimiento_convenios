@@ -40,7 +40,7 @@ class HomeController extends Controller
                 break;
             }
         }else{
-            $convenios = Convenio::where('datFechaFinConvenio','<=',date('Y-m-d'));
+            $convenios = Convenio::where('datFechaFinConvenio','>=',date('Y-m-d'))->get();
             $fecha2 = new DateTime();
             $i=0;
             foreach($convenios as $convenio){

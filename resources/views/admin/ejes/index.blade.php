@@ -40,27 +40,26 @@
                 @endcan
                 <thead>
                     <tr class="col">
-                        <th>ID</th>
+                        <th>#</th>
                         <th>Dependencia</th>
-                        <th>Fecha de Creación</th>
-                        <th>Fecha de Modificación</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($ejes as $eje)
+                    @foreach($ejes as $numero => $eje)
                         <tr class="row">
-                            <td>{{$eje->idEje}}</td>
+                            <td>{{$numero + 1}}</td>
                             <td>{{$eje->chaNombreEje}}</td>
-                            <td>{{$eje->tstCreacionEje}}</td>
-                            <td>{{$eje->tstModificacionEje}}</td>
                             <td>
+                            <form action="{{route('admin.ejes.destroy', $eje->idEje)}}" method="POST">
+                            @csrf
+                            @method('DELETE')  
                                 @can('admin.ejes.show')
                                 <a href="{{route('admin.ejes.show', $eje)}}" class="button__table">
                                     <span class="icon__button--view">
                                     <i class="fa-solid fa-eye"></i>
                                     </span>
-                                    <span class="button__table--spam">Ver</span>
+                                    <span class="button__table--spam">Ver Convenios</span>
                                 </a> 
                                 @endcan      
                                 @can('admin.ejes.edit')
@@ -72,13 +71,14 @@
                                 </a>
                                 @endcan 
                                 @can('admin.ejes.destroy')
-                                <button type="button" class="button__table button__table--right">
+                                <button type="submit" class="button__table button__table--right" onclick="return confirm('¿Seguro que deseas eliminar el registro?');">
                                     <span class="icon__button--delete">
                                     <i class="fa-solid fa-trash-can"></i>
                                     </span>
                                     <span class="button__table--spam">Eliminar</span>
                                 </button>
-                                @endcan   
+                                @endcan  
+                            </form> 
                             </td>
                         </tr>
                     @endforeach
