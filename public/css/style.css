@@ -1185,6 +1185,28 @@ p{
     float: left;
    
 
+
+}
+
+.filtro__year,
+.filtro__input{
+   
+    width: 50%;
+    height: 100%;
+    display: block;
+    float: left;
+   
+}
+
+.filtro__input{
+    line-height: 40px;
+}
+.clearfix{
+  float: none;
+  clear: both;
+}
+
+
 }
 
 .filtro__year,

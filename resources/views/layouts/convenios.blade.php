@@ -3,6 +3,19 @@
 
 <head>
     <meta charset="utf-8">
+
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/swiper.css">  
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    @yield('css')
+
+    <title>CONTROL Y SEGUIMIENTO CONVENIOS </title>
+    <link rel="icon" type="image/x-icon" href="/img/logo.png">
+ 
+
     <link rel="stylesheet" type="text/css" href="{{url('css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url('css/dataTables.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url('css/buttons.dataTables.min.css')}}">
@@ -13,6 +26,7 @@
     <title>CONTROL Y SEGUIMIENTO CONVENIOS </title>
     <link rel="icon" type="image/x-icon" href="{{url('img/logoEspoch.svg')}}">
     <script src="/js/table2excel.js"></script> 
+
 </head>
 
 <body >
@@ -30,6 +44,7 @@
         <footer class="footer">
             <p class="footer__text">
                    Escuela Superior Politécnica de Chimborazo © 2022
+                   
             </p>
         </footer>
 
