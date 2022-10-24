@@ -34,10 +34,18 @@
 
             <div class="tipo estadistica--click tipo--big caducado-g--click">
 				<span class="label__matriz"><i class="fa-solid fa-chart-column"></i>Convenios Caducados</span>
+
+			<div class="tipo estadistica--click tipo--big vigente-g--click">
+				<span class="label__matriz"><i class="fa-solid fa-chart-column"></i>Convenios Vigentes dpt. Planifiación</span>
+			</div>           
+			<div class="tipo estadistica--click tipo--big caducado-g--click">
+				<span class="label__matriz"><i class="fa-solid fa-chart-column"></i>Convenios Caducados dpt. Planifiación</span>
+
 			</div>
 		</div>
 		<div class="reporte__content">
 			<div class="overlay__matriz overlay--active">
+
            <div class="fixed">
 
 		
@@ -98,10 +106,86 @@
 							<th>Cumplimiento Parcial</th>
 							<th>Crtiterio Total</th>
 							<th>Cumplimiento Total</th>
+
+				<div class="fixed">
+					<form  method="POST" action="{{route('tecnico.reporte')}}">
+						@csrf
+						<button type="submit" class="button  export">
+						<span  class="nav__link nav__link--small nav__link--white">
+						<span class="link__icon--margin">
+						<i class="fa-solid fa-filter"></i>
+						</span>
+						Filtrar
+						</span>
+						</button >
+						<div class="buttonFecha">
+							<div class="labelFecha">
+								<span>
+									<h5>
+										Hasta
+									</h5>
+								</span>
+							</div>
+							<div class="fecha">
+								{{ Form::date('hasta', null, ['class' => 'input form-control']) }}
+								@error('hasta')
+								<span class="text--danger">{{$message}}</span>
+								@enderror
+							</div>
+						</div>
+						<div class="buttonFecha">
+							<div class="labelFecha">
+								<span>
+									<h5>
+										Desde
+									</h5>
+								</span>
+							</div>
+							<div class="fecha">
+								{{ Form::date('desde', null, ['class' => 'input form-control']) }}
+								@error('desde')
+								<span class="text--danger">{{$message}}</span>
+								@enderror
+							</div>
+						</div>
+					</form>
+				</div>
+				
+
+
+
+				<table class="tabla display" id="Table__Matriz">
+					
+					<thead>
+						<tr class="col">
+							<th>Resolución</th>
+							<th>Convenio</th>
+							<th>Objeto del Convenio</th>
+							<th>Coordinador</th>
+							<th>Estado</th>
+							<th>Legalización y Vigencia</th>
+							<th>Criterio Parcial</th>
+
+							<th>Cumplimiento Parcial</th>
+
+
+							<th>Criterio Total</th>
+
+							<th>Cumplimiento Total</th>
+
+							<th>Informes Presentados</th>
+
+							<th>Informes Pendientes</th>
+
+
+
+							
+
 						</tr>
 					</thead>
 					<tbody>
 						@foreach($conveniosTotales as $convenio)
+
 						<tr class="row">
 							<td class="visble"><b>{{$convenio->idConvenio}}</b></td>
 							<td>
@@ -178,6 +262,116 @@
 					</tbody>
 				</table>
 			
+
+							<tr class="row">
+								<td><b>{{$convenio->Resolucion}}</b></td>
+								<td>{{$convenio->texNombreConvenio}}
+								<td>{{$convenio->texObjetoConvenio}}</td>
+								<td>
+									@if(is_null($convenio->Coordinador)==false)
+										{{$convenio->Coordinador->chaCargoCoordinador}}
+										<br>
+										{{$convenio->Coordinador->dependencia->vchNombreDependencia}}
+										<br>
+										Mediante 
+										{{$convenio->Coordinador->pivot->chaNombreResolucion}}
+										@if(is_null($convenio->Delegado)==false)
+											<br>
+											Delega a
+											<br>
+											{{$convenio->Delegado->chaCargoCoordinador}}
+											<br>
+											{{$convenio->Delegado->dependencia->vchNombreDependencia}}
+											<br>
+											Mediante 
+											{{$convenio->Delegado->pivot->chaNombreResolucion}}
+										@endif
+									@else
+									Sin Coordinador
+									@endif
+								</td>
+								
+								</td>
+								<td>{{$convenio->Estado}}</td>
+								<td>Legalizado
+									<br>
+									{{$convenio->datFechaInicioConvenio}}
+									<br>
+									<br>
+									Vigencia
+									<br>
+									{{$convenio->Vigencia}}
+								</td>
+
+								<td>
+									{{$convenio->criterioParcial}}
+								</td>
+
+								<td>
+									{{$convenio->cumplimientoParcial}}
+								</td>
+
+
+								<td>
+									{{$convenio->criterioTotal}}
+								</td>
+
+
+								<td>
+									{{$convenio->cumplimientoTotal}}
+								</td>
+
+
+								<td>
+									@foreach ($convenio->informes as $informe)
+
+									@if ($informe->chaEstadoInforme  == 'Presentado')
+									<p>
+
+									
+									<span> informe del </span> <span>{{$informe->datFechaInicioInforme}}</span>
+								    <span>al </span> <span>{{$informe->datFechaFinInforme}}</span>
+
+									</p>
+										    
+									@endif
+										
+									@endforeach
+								</td>
+
+
+								<td>
+									@foreach ($convenio->informes as $informe)
+
+									@if ($informe->chaEstadoInforme  == 'Pendiente')
+									<p>
+
+									
+									<span> informe del </span> <span>{{$informe->datFechaInicioInforme}}</span>
+								    <span>al </span> <span>{{$informe->datFechaFinInforme}}</span>
+
+									</p>
+										    
+									@endif
+										
+									@endforeach
+								</td>
+
+
+
+
+								
+							</tr>
+						@endforeach
+					</tbody>
+				</table>
+
+
+
+
+
+
+
 			</div>
 			<div class="overlay_estaditica">
 				@include('tecnico.reportes.graficos.graficosVigentes')
@@ -185,6 +379,7 @@
 			<div class="overlay_estaditica caducado_overlay--click">
 				@include('tecnico.reportes.graficos.graficosCaducados')
 			</div>
+
 
 			<div class="overlay_estaditica vigenteG_overlay--click">
 				@include('tecnico.reportes.graficos.graficosEspecificosCaducados')
@@ -201,6 +396,22 @@
 	<?php
 		$convenioMarcoGraph = json_encode(count($convenioMarco))
 		?>
+
+		
+			<div class="overlay_estaditica caducadoG_overlay--click">
+			@include('tecnico.reportes.graficos.graficosEspecificosCaducados')
+			
+			</div>
+
+			<div class="overlay_estaditica vigenteG_overlay--click">
+			@include('tecnico.reportes.graficos.graficosEspecificosVigentes')
+			</div>
+
+			<div class="lo">
+			</div>
+		</div>
+	</div>
+
 </section>
 @endsection
 @section('js')
@@ -213,6 +424,7 @@
 <script src="https://cdn.datatables.net/fixedheader/3.1.6/js/dataTables.fixedHeader.min.js"></script>
 <script src="{{asset('js/reportes/matriz/matrizGeneral.js')}}"></script>
 <!--Gráficos  -->
+
 <script >
 
 	let graph1=document.getElementById("graph1").getContext("2d");
@@ -222,6 +434,22 @@
 	        labels: ['Convenio Marco', 'Convenio Específico', 'Convenio Internacional'],
 	        datasets: [{
 	            label: 'Clasificación de Convenios Insitucionales',
+
+
+
+
+</script>
+<script >
+
+	let graph1=document.getElementById("graph1").getContext("2d");
+	
+	var char = new Chart(graph1,{
+	  type: 'bar',
+	    data: {
+	        labels: ['Convenio {{$clasificacion1}}', 'Convenio {{$clasificacion2}}', 'Convenio {{$clasificacion3}}'],
+	        datasets: [{
+	            label: 'Clasificación de Convenios Interinstitucionales',
+
 	            data: [{{count($convenioMarco)}}, {{count($convenioEspecifico)}}, {{count($convenioInternacional)}}],
 	            backgroundColor: [
 	                'rgba(13,25,191,0.2)',
@@ -260,10 +488,17 @@
 	var char = new Chart(graph2,{
 	  type: 'bar',
 	    data: {
+
 	        labels: ['Convenio Marco', 'Convenio Específico', 'Convenio Internacional'],
 	        datasets: [{
 	            label: 'Nivel de Cumplimineto Parcial',
 	            data: [{{$cumplimientoMarcoParcial}}, {{$cumplimientoEspecificoParcial}}, {{$cumplimientoInternacionalParcial}}],
+
+			labels: ['Convenio {{$clasificacion1}}', 'Convenio {{$clasificacion2}}', 'Convenio {{$clasificacion3}}'],
+	        datasets: [{
+	            label: 'Nivel de Cumplimiento Parcial',
+				data: [{{$vigenciaConveniosMarcos}}, {{$vigenciaConveniosEspecificos}}, {{$vigenciaConveniosInternacionales }}],
+
 	            backgroundColor: [
 	                'rgba(13,25,191,0.2)',
 					
@@ -301,10 +536,17 @@
 	var char = new Chart(graph3,{
 	  type: 'bar',
 	    data: {
+
 	        labels: ['Convenio Marco', 'Convenio Específico', 'Convenio Internacional'],
 	        datasets: [{
 	            label: 'Nivel de Cumplimineto Total',
 	            data: [{{$cumpliminetoMarcoTotal}}, {{$cumplimientoEspecificoTotal}}, {{$cumplimientoInternacionalTotal}}],
+
+			labels: ['Convenio {{$clasificacion1}}', 'Convenio {{$clasificacion2}}', 'Convenio {{$clasificacion3}}'],
+	        datasets: [{
+	            label: 'Nivel de Cumplimiento Total ',
+	            data: [{{$vigenciaConveniosMarcosTotal}}, {{$vigenciaConveniosEspecificosTotal}}, {{$vigenciaConveniosInternacionalesTotal}}],
+
 	            backgroundColor: [
 	                'rgba(13,25,191,0.2)',
 					
@@ -338,15 +580,26 @@
 	
 </script>
 <script>
+
 	var marcoEspecificoCaducado = {{count($convenioMarcoCaducado)}}+{{count($convenioEspecificoCaducado)}};
+
+
+
 	let graph4=document.getElementById("graph4").getContext("2d");
 	var char = new Chart(graph4,{
 	  type: 'bar',
 	    data: {
+
 	        labels: ['Convenio Marco y Específico', 'Convenio Específico', 'Convenio Internacional'],
 	        datasets: [{
 	            label: 'Clasificacion de convenidos caducados',
 	            data: [marcoEspecificoCaducado, {{count($convenioEspecificoCaducado)}}, {{count($convenioInternacionalCaducado)}}],
+
+			labels: ['Convenio {{$clasificacion1}}', 'Convenio {{$clasificacion2}}', 'Convenio {{$clasificacion3}}'],
+	        datasets: [{
+	            label: 'Clasificacion de Convenidos Interinstitucionales Caducados',
+				data: [{{count($convenioMarcoCaducado)}}, {{count($convenioEspecificoCaducado)}}, {{count($convenioInternacionalCaducado)}}],
+
 	            backgroundColor: [
 	                'rgba(13,25,191,0.2)',
 					
@@ -383,10 +636,17 @@
 	var char = new Chart(graph5,{
 	  type: 'bar',
 	    data: {
+
 	        labels: ['Convenio Marco', 'Convenio Específico', 'Convenio Internacional'],
 	        datasets: [{
 	            label: 'Nivel de Cumplimineto Parcial',
 	            data: [{{$cumplimientoMarcoParcialCaducado}}, {{$cumplimientoEspecificoParcialCaducado}}, {{$cumplimientoInternacionalParcialCaducado}}],
+
+			labels: ['Convenio {{$clasificacion1}}', 'Convenio {{$clasificacion2}}', 'Convenio {{$clasificacion3}}'],
+	        datasets: [{
+	            label: 'Nivel de Cumplimiento Parcial',
+				data: [{{$vigenciaConveniosMarcosCaducado}}, {{$vigenciaConveniosEspecificosCaducado}}, {{$vigenciaConveniosInternacionalesCaducado}}],
+
 	            backgroundColor: [
 	                'rgba(13,25,191,0.2)',
 					
@@ -425,10 +685,17 @@
 	var char = new Chart(graph7,{
 	  type: 'bar',
 	    data: {
+
 	        labels: ['Convenio Marco', 'Convenio Específico', 'Convenio Internacional'],
 	        datasets: [{
 	            label: 'Nivel de Cumplimineto Total',
 	            data: [{{$cumpliminetoMarcoTotalCaducado}}, {{$cumplimientoEspecificoTotalCaducado}}, {{$cumplimientoInternacionalTotalCaducado}}],
+
+			labels: ['Convenio {{$clasificacion1}}', 'Convenio {{$clasificacion2}}', 'Convenio {{$clasificacion3}}'],
+	        datasets: [{
+	            label: 'Nivel de Cumplimiento Total',
+	            data: [{{$vigenciaConveniosMarcosTotalCaducado}}, {{$vigenciaConveniosEspecificosTotalCaducado}}, {{$vigenciaConveniosInternacionalesTotalCaducado}}],
+
 	            backgroundColor: [
 	                'rgba(13,25,191,0.2)',
 					
@@ -464,14 +731,30 @@
 
 
 
+
+
+	
+	
+	/**DEPARTAMENTO DE PLANIFICACION*/
+	
+
 	let graph8=document.getElementById("graph8").getContext("2d");
 	var char = new Chart(graph8,{
 	  type: 'bar',
 	    data: {
+
 	        labels: ['Convenio Marco', 'Convenio Específico', 'Convenio Internacional'],
 	        datasets: [{
 	            label: 'Nivel de Cumplimineto Total',
 	            data: [{{$cumpliminetoMarcoTotalCaducado}}, {{$cumplimientoEspecificoTotalCaducado}}, {{$cumplimientoInternacionalTotalCaducado}}],
+
+
+
+	        labels: ['Convenio {{$clasificacion1}} y {{$clasificacion2}}', 'Convenio {{$clasificacion1}} - {{$eje1}}', 'Convenio {{$clasificacion3}}'],
+	        datasets: [{
+	            label: 'Clasificación de Convenios Interinstitucionales  ',
+	            data: [{{count($convenioMarco)+ count($convenioEspecifico)}}, {{count($convenioEspecificoPracticas)}}, {{count($convenioInternacional)}}],
+
 	            backgroundColor: [
 	                'rgba(13,25,191,0.2)',
 					
@@ -516,6 +799,24 @@
 	        datasets: [{
 	            label: 'Nivel de Cumplimineto Total',
 	            data: [{{$cumpliminetoMarcoTotalCaducado}}, {{$cumplimientoEspecificoTotalCaducado}}, {{$cumplimientoInternacionalTotalCaducado}}],
+
+	
+	
+	<?php
+		$vigenciaParcial=  ($vigenciaConveniosMarcos + $vigenciaConveniosEspecificos)/2;
+	
+		?>
+	
+	let graph9=document.getElementById("graph9").getContext("2d");
+
+	var char = new Chart(graph9,{
+	  type: 'bar',
+	    data: {
+	        labels: ['Convenio {{$clasificacion1}} y {{$clasificacion2}}', 'Convenio {{$clasificacion1}} - {{$eje1}}', 'Convenio {{$clasificacion3}}'],
+	        datasets: [{
+	            label: 'Nivel de Cumplimiento Parcial',
+				data: [{{$vigenciaParcial}}, {{$vigenciaConveniosEspecificosPracticas}}, {{$vigenciaConveniosInternacionales }}],
+
 	            backgroundColor: [
 	                'rgba(13,25,191,0.2)',
 					
@@ -551,15 +852,33 @@
 
 
 
+
+
+
+	
+	
+	<?php
+		$vigenciaTotal=  ($vigenciaConveniosMarcosTotal+ $vigenciaConveniosEspecificosTotal)/2;
+	
+		?>
+	
+	
 
 	let graph10=document.getElementById("graph10").getContext("2d");
 	var char = new Chart(graph10,{
 	  type: 'bar',
 	    data: {
+
 	        labels: ['Convenio Marco', 'Convenio Específico', 'Convenio Internacional'],
 	        datasets: [{
 	            label: 'Nivel de Cumplimineto Total',
 	            data: [{{$cumpliminetoMarcoTotalCaducado}}, {{$cumplimientoEspecificoTotalCaducado}}, {{$cumplimientoInternacionalTotalCaducado}}],
+
+	        labels: ['Convenio {{$clasificacion1}} y {{$clasificacion2}}', 'Convenio {{$clasificacion1}} - {{$eje1}}', 'Convenio {{$clasificacion3}}'],
+	        datasets: [{
+	            label: 'Nivel de Cumplimiento Total',
+				data: [{{$vigenciaTotal}}, {{$vigenciaConveniosEspecificosTotalPracticas}}, {{$vigenciaConveniosInternacionalesTotal}}],
+
 	            backgroundColor: [
 	                'rgba(13,25,191,0.2)',
 					
@@ -595,15 +914,30 @@
 
 
 
+
+
+
+	
+	
+	
+	
+	
 
 	let graph11=document.getElementById("graph11").getContext("2d");
 	var char = new Chart(graph11,{
 	  type: 'bar',
 	    data: {
+
 	        labels: ['Convenio Marco', 'Convenio Específico', 'Convenio Internacional'],
 	        datasets: [{
 	            label: 'Nivel de Cumplimineto Total',
 	            data: [{{$cumpliminetoMarcoTotalCaducado}}, {{$cumplimientoEspecificoTotalCaducado}}, {{$cumplimientoInternacionalTotalCaducado}}],
+
+			labels: ['Convenio {{$clasificacion1}} y {{$clasificacion2}}', 'Convenio {{$clasificacion1}} - {{$eje1}}', 'Convenio {{$clasificacion3}}'],
+	        datasets: [{
+	            label: 'Clasificación de Convenios Interinstitucionales Caducados',
+				data: [{{count($convenioMarcoCaducado) + count($convenioEspecificoCaducado) }}, {{count($convenioEspecificoCaducadoPracticas)}}, {{count($convenioInternacionalCaducado)}}],
+
 	            backgroundColor: [
 	                'rgba(13,25,191,0.2)',
 					
@@ -640,15 +974,33 @@
 
 
 
+
+
+	
+	
+	
+	<?php
+		$caducadoParcial=  ($vigenciaConveniosMarcosCaducado+ $vigenciaConveniosEspecificosCaducado)/2;
+	
+		?>
+	
+	
 
 	let graph12=document.getElementById("graph12").getContext("2d");
 	var char = new Chart(graph12,{
 	  type: 'bar',
 	    data: {
+
 	        labels: ['Convenio Marco', 'Convenio Específico', 'Convenio Internacional'],
 	        datasets: [{
 	            label: 'Nivel de Cumplimineto Total',
 	            data: [{{$cumpliminetoMarcoTotalCaducado}}, {{$cumplimientoEspecificoTotalCaducado}}, {{$cumplimientoInternacionalTotalCaducado}}],
+
+			labels: ['Convenio {{$clasificacion1}} y {{$clasificacion2}}', 'Convenio {{$clasificacion1}} - {{$eje1}}', 'Convenio {{$clasificacion3}}'],
+	        datasets: [{
+	            label: 'Nivel de Cumplimiento Parcial',
+				data: [{{$caducadoParcial}}, {{$vigenciaConveniosEspecificosCaducadoPracticas}}, {{$vigenciaConveniosInternacionalesCaducado}}],
+
 	            backgroundColor: [
 	                'rgba(13,25,191,0.2)',
 					
@@ -684,14 +1036,31 @@
 
 
 
+
+
+	<?php
+		$caducadoTotal=  ($vigenciaConveniosMarcosTotalCaducado+ $vigenciaConveniosEspecificosTotalCaducado)/2;
+	
+		?>
+	
+	
+	
+
 	let graph13=document.getElementById("graph13").getContext("2d");
 	var char = new Chart(graph13,{
 	  type: 'bar',
 	    data: {
+
 	        labels: ['Convenio Marco', 'Convenio Específico', 'Convenio Internacional'],
 	        datasets: [{
 	            label: 'Nivel de Cumplimineto Total',
 	            data: [{{$cumpliminetoMarcoTotalCaducado}}, {{$cumplimientoEspecificoTotalCaducado}}, {{$cumplimientoInternacionalTotalCaducado}}],
+
+			labels: ['Convenio {{$clasificacion1}} y {{$clasificacion2}}', 'Convenio {{$clasificacion1}} - {{$eje1}}', 'Convenio {{$clasificacion3}}'],
+	        datasets: [{
+	            label: 'Nivel de Cumplimiento Total',
+	            data: [{{$caducadoTotal}}, {{$vigenciaConveniosEspecificosTotalCaducadoPracticas}}, {{$vigenciaConveniosInternacionalesTotalCaducado}}],
+
 	            backgroundColor: [
 	                'rgba(13,25,191,0.2)',
 					
@@ -722,6 +1091,10 @@
 	    },
 		plugins:[ChartDataLabels]
 	});
+	
+
+
+
 	
 
 </script>

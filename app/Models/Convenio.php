@@ -14,6 +14,7 @@ class Convenio extends Model
     const UPDATED_AT = 'tstModificacionConvenio'; // personaliza el campo updated_at
 
     protected $fillable = ['idClasificacion',
+                        'idResolucion',
                         'texNombreConvenio',
                         'texObjetoConvenio',
                         'datFechaInicioConvenio',
@@ -33,6 +34,9 @@ class Convenio extends Model
     public function Clasificacion(){ //Realiza la relacion
         return $this->belongsTo(Clasificacion::class, 'idClasificacion'); //Relacion n a 1 
     }
+    public function Resolucion(){ //Realiza la relacion
+        return $this->belongsTo(Resolucion::class,'idResolucion'); //Relacion n a 1
+    }
 
     //Relacion muchos a muchos 
     public function Ejes(){ //Realiza la relacion
@@ -40,11 +44,9 @@ class Convenio extends Model
     }
  
     public function Coordinadores(){ //Realiza la relacion
-        return $this->belongsToMany(Coordinador::class, 'v_convenios_coordinadores', 'idConvenio', 'idCoordinador')->withPivot('chaEstadoCoordinador'); //Relacion n a n 
+        return $this->belongsToMany(Coordinador::class, 'v_convenios_coordinadores', 'idConvenio', 'idCoordinador')->withPivot('chaTipoCoordinador','chaEstadoCoordinador','chaNombreResolucion'); //Relacion n a n 
     }
 
-    public function Resoluciones(){ //Realiza la relacion
-        return $this->belongsToMany(Resolucion::class, 'v_convenios_resoluciones', 'idConvenio', 'idResolucion'); //Relacion n a n 
-    }
+    
 
 }

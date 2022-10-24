@@ -1,4 +1,6 @@
 
+
+
 /*GENERAL*/
 @font-face {
     font-family: 'HelveticaNeueLTStd';
@@ -148,6 +150,7 @@
 .nav__link-coordinador,
 .nav__link-convenio,
 .nav__link-reporte,
+.nav__link-rol,
 .nav__link-inicio{
     padding-left: 5px;
     width: 200px;
@@ -161,9 +164,7 @@
     margin-left: 3.9%;
     display: none;
     text-decoration: none;
-    transition: all 300ms;
-   
-   
+    transition: all 300ms;  
 }
 
 .nav__element--block:hover .nav__link--active{
@@ -1158,6 +1159,9 @@ p{
 .wrapper__row-1{
     grid-template-columns: 1fr;
 }
+.wrapper__row-2{
+    grid-template-columns: 1fr 1fr;
+}
 
 /*Button*/
 .button--plus{
@@ -1181,6 +1185,7 @@ p{
     float: left;
    
 
+
 }
 
 .filtro__year,
@@ -1201,3 +1206,38 @@ p{
   clear: both;
 }
 
+
+}
+
+.filtro__year,
+.filtro__input{
+   
+    width: 50%;
+    height: 100%;
+    display: block;
+    float: left;
+   
+}
+.filtro__year{
+    width: auto;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+.filtro__input{
+    line-height: 40px;
+}
+
+.filtro__input{
+    margin-top: -10px;
+}
+.clearfix{
+  float: none;
+  clear: both;
+}
+
+
+
+@media(max-width: 649px){
+    
+       
+}

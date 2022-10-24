@@ -40,6 +40,7 @@ expand__icon.addEventListener('click', () => {
 
 
 /*table */
+
 $(document).ready(function () {
   $('#Table__Usuarios').DataTable({
     "language": {
@@ -147,6 +148,116 @@ $(document).ready(function () {
 
 
 
+
+
+$(document).ready( function () {
+    $('#Table__Usuarios').DataTable({
+        "language":{
+            "url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
+          }
+          });
+} );
+
+$(document).ready( function () {
+  $('#Table__Roles').DataTable({
+      "language":{
+          "url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
+        }
+        });
+} );
+
+$(document).ready( function () {
+    $('#Table__Dependencias').DataTable({
+        "language":{
+            "url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
+          }
+          });
+} );
+$(document).ready( function () {
+    $('#Table__Clasificaciones').DataTable({
+        "language":{
+            "url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
+          }
+          });
+} );
+$(document).ready( function () {
+    $('#Table__Ejes').DataTable({
+        "language":{
+            "url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
+          }
+          });
+} );
+
+$(document).ready( function () {
+    $('#Table__Coordinadores').DataTable({
+        "language":{
+            "url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
+          }
+          });
+} );
+
+$(document).ready( function () {
+    $('#Table__CoordinadoresAsignados').DataTable({
+        "language":{
+            "url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
+          }
+          });
+} );
+
+$(document).ready( function () {
+    $('#Table__Convenios').DataTable({
+        
+
+          "language":{
+            "url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
+          }
+          
+          });
+} );
+
+$(document).ready( function () {
+    $('#Table__Resoluciones').DataTable({
+        
+
+          "language":{
+            "url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
+          }
+          
+          });
+} );
+
+$(document).ready( function () {
+    $('#Table__ResolucionesAsignadas').DataTable({
+        
+
+          "language":{
+            "url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
+          }
+          
+          });
+} );
+
+$(document).ready( function () {
+    $('#Table__InformesPendientes').DataTable({
+        
+
+          "language":{
+            "url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
+          }
+          
+          });
+} );
+
+$(document).ready( function () {
+    $('#Table__InformesPresentados').DataTable({
+        
+
+          "language":{
+            "url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"
+          }
+          
+          });
+} );
 
 
 

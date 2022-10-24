@@ -1,4 +1,5 @@
 var swiper = new Swiper(".mySwiper", {
+
   cssMode: true,
   navigation: {
     nextEl: ".swiper-button-next",
@@ -12,6 +13,23 @@ var swiper = new Swiper(".mySwiper", {
 });
 
 
+
+
+    cssMode: true,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    pagination: {
+      el: ".swiper-pagination",
+    },
+    mousewheel: true,
+    keyboard: true,
+  });
+
+
+
+  
 
 var matriz = document.querySelector('.matriz--click');
 var estaditica = document.querySelector('.estadistica--click');
@@ -139,7 +157,6 @@ caducado_general.addEventListener('click', () => {
 
 
 });
-
 
 
 

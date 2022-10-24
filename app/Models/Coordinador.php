@@ -35,7 +35,7 @@ class Coordinador extends Model
 
     //Relacion muchos a muchos 
     public function Convenios(){ //Realiza la relacion
-        return $this->belongsToMany(Convenio::class, 'v_convenios_coordinadores', 'idCoordinador', 'idConvenio')->withPivot('chaEstadoCoordinador'); //Relacion n a n 
+        return $this->belongsToMany(Convenio::class, 'v_convenios_coordinadores', 'idCoordinador', 'idConvenio')->withPivot('chaTipoCoordinador','chaEstadoCoordinador','chaNombreResolucion'); //Relacion n a n 
     }
 
     public function Resoluciones(){

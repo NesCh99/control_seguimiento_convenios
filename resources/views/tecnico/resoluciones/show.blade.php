@@ -39,23 +39,10 @@
                                 </div>
 
                                 <div class="fila">
-                                    <span class="fila__label">Nombre de la Resolucion
-                                    @if(strcmp($resolucion->texUrlResolucion,'Sin Link')!=0)
-                                        <a href="{{$resolucion->texUrlResolucion}}" target="_blank"  class="button__table button__table--right">
-                                            <span class="icon__button--update">
-                                            <i class="fa-solid fa-file" style="font-size: 18px;"></i>
-                                            </span>
-                                            <span class="button__table--spam">Ver Documento</span>
-                                        </a>                                 
-                                    @endif
+                                    <span class="fila__label">
+                                        Nombre de la Resolucion
                                     </span>
                                     <p class="fila__text">{{$resolucion->chaNombreResolucion}}</p>
-                                </div>
-                            </div>
-                            <div class="wrapper__row-1 ">
-                                <div class="fila">
-                                    <span class="fila__label">Objeto de la Resolución</span>
-                                    <p class="fila__text"><b>{{$resolucion->texObjetoResolucion}}</b></p>
                                 </div>
                             </div>
                             <div class="wrapper">

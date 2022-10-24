@@ -19,8 +19,14 @@ class DatabaseSeeder extends Seeder
         $this->call(ClasificacionesSeeder::class);
         $this->call(EjesSeeder::class);
         $this->call(DependenciasSeeder::class);
+
         $this->call(CoordinadorSeeder::class);
         $this->call(ResolucionSeeder::class);
         $this->call(ConvenioSeeder::class);
+
+        $this->call(RolSeeder::class);
+        $this->call(UsuarioSeeder::class);
+        
+
     }
 }

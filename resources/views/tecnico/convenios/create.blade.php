@@ -38,23 +38,43 @@
                             </div>
                             <div class="fila">
                                 <span class="fila__label">
-                                    Link del Documento del Convenio
+                                    Objeto del Convenio
                                 </span>
-                                {!! Form::text('Link', null, ['class'=>'input form-control']) !!}
-                                @error('Link')
+                                {!! Form::textarea('Objeto', null, ['class'=>'input form-control', 'style' => 'height:40px;']) !!}
+                                @error('Objeto')
                                 <span class="text--danger">{{$message}}</span>
                                 @enderror
                             </div>
+                            <div class="wrapper">
+                                <div class="fila">
+                                    <span class="fila__label">
+                                        Resolución de Aprobación del Convenio
+                                    </span>
+                                    {!! Form::text('Resolucion', null, ['class'=>'input form-control', 'id' => 'Resolucion', 'placeholder'=>'Busque una resolución existente']) !!}
+                                    @error('Resolucion')
+                                    <span class="text--danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="fila">
+                                    <span class="fila__label">
+                                        Link del Documento del Convenio
+                                    </span>
+                                    {!! Form::text('Link', null, ['class'=>'input form-control']) !!}
+                                    @error('Link')
+                                    <span class="text--danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            
                             <div class="wrapper wrapper__row-4">
                                 <div class="fila">
                                     <span class="fila__label">
                                         Clasificación
                                     </span>
-                                    <select class="input form-control" name="Clasificacion" id="Clasificacion">
-                                        @foreach($clasificaciones as $clasificacion)
-                                            <option value="{{$clasificacion->idClasificacion}}">{{$clasificacion->chaNombreClasificacion}}</option>
-                                        @endforeach
-                                    </select>                                    
+                                    {!! Form::select('Clasificacion', $clasificaciones, null, ['class'=>'input form-control', 'id'=>'Clasificacion', 'onchange'=>'esconderClasificacion()']) !!}                             
+                                    @error('Clasificacion')
+                                        <span class="text--danger">{{$message}}</span>
+                                    @enderror
                                 </div>   
                                 <div class="fila">
                                     <span class="fila__label">
@@ -69,14 +89,20 @@
                                     <span class="fila__label">
                                         Vigencia: Años
                                     </span>
-                                    {{ Form::selectRange('Años', 0, 12, null, ['class' => 'input form-control'])}}
+                                    {{ Form::selectRange('Años', 0, 20, null, ['class' => 'input form-control'])}}
                                     @error('Años')
                                         <span class="text--danger">{{$message}}</span>
-                                    @enderror
-                                    
+                                    @enderror   
+                                    <div class="form-control">
+                                        <span class="fila__label">
+                                            Indeterminado
+                                        </span>
+                                        
+                                        {!! Form::checkbox('indeterminado','true', null, ['class'=>'form-control','id'=>'indeterminado', 'onchange' => 'deshabilitarVigencia()']) !!}
+                                    </div>                                 
                                 </div>
                                 <div class="fila">
-                                <span class="fila__label">
+                                    <span class="fila__label">
                                         Vigencia: Meses
                                     </span>
                                     {{ Form::selectRange('Meses', 0, 11, null, ['class' => 'input form-control'])}}
@@ -94,15 +120,16 @@
                                         @foreach($ejes as $eje)
                                             <div>
                                                 <label>
-                                                    {!! Form::checkbox('ejes[]', $eje->idEje, null, ['class'=>'form-control']) !!}
+                                                    {!! Form::checkbox('ejes[]', $eje->idEje, null, ['class'=>'form-control', 'id' => 'check']) !!}
+                                                    {!! Form::radio('ejes[]', $eje->idEje, null, ['class'=>'form-control', 'id' => 'radio']) !!}
                                                     {{$eje->chaNombreEje}}
                                                 </label>
                                             </div>
                                         @endforeach                                        
                                     </div>
                                     @error('ejes')
-                                            <span class="text--danger">{{$message}}</span>
-                                        @enderror
+                                        <span class="text--danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                             </div>                            
                         </div>
@@ -122,26 +149,54 @@
 @section('overlay')
 <script src="/js/overlay.js"></script> 
 <script>    
-    /* Funcion que esconde los ejes cuando se escoge la clasificación internacional en el select */
-    $('#Clasificacion').on('change', function(){
-        var seleccionado = $("#Clasificacion option:selected" ).text();
+    /* Funcion que esconde los ejes en caso de ser internacional*/
+    function esconderClasificacion(){
+        var seleccionado = $("#Clasificacion option:selected" ).val();
         
-        if(seleccionado == 'Internacional'){
+        if(seleccionado == '3'){
             $('.campoEjes').hide();
         }else{
             $('.campoEjes').show();
         }
-    });
-    /* Funcion que esconde los ejes en caso de ser internacional cuando se carga la página*/
-    function esconder(){
-        var seleccionado = $("#Clasificacion option:selected" ).text();
-        
-        if(seleccionado == 'Internacional'){
-            $('.campoEjes').hide();
+
+        if(seleccionado == '2'){
+            $('input[id="check"]').hide();
+            $('input[id="check"]').attr('name', 'ejeInvalido');
+            $('input[id="radio"]').show();
+            $('input[id="radio"]').attr('name', 'ejes[]');
+        }else if(seleccionado == '1'){
+            $('input[id="check"]').show();
+            $('input[id="check"]').attr('name', 'ejes[]');
+            $('input[id="radio"]').hide();
+            $('input[id="radio"]').attr('name', 'ejeInvalido');
+        }
+
+        if($('#indeterminado').is(':checked')){
+            $('select[name="Años"]').attr('disabled', 'disabled');
+            $('select[name="Meses"]').attr('disabled', 'disabled');
         }else{
-            $('.campoEjes').show();
+            $('select[name="Años"]').removeAttr('disabled');
+            $('select[name="Meses"]').removeAttr('disabled');
         }
     };
-    window.onload = esconder;
+    /* Funcion que deshabilita la vigencia en caso de que sea una vigencia indeterminada*/
+    function deshabilitarVigencia(){
+        if($('#indeterminado').is(':checked')){
+            $('select[name="Años"]').attr('disabled', 'disabled');
+            $('select[name="Meses"]').attr('disabled', 'disabled');
+        }else{
+            $('select[name="Años"]').removeAttr('disabled');
+            $('select[name="Meses"]').removeAttr('disabled');
+        }
+        
+    };
+    window.onload = esconderClasificacion;
+    
+    $(function() {
+        var resoluciones =  <?php echo json_encode($resoluciones); ?>;
+        $( "#Resolucion" ).autocomplete({
+        source: resoluciones
+        });
+    } );
 </script>
 @endsection

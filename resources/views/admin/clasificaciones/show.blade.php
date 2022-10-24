@@ -1,137 +1,128 @@
 @extends('layouts.convenios')
 @section('workArea')
+
 <section class="core">
+    <!-- Funcion que muestra una notificacion -->
+    @if(session('info'))
+    <div class="alert alert--info">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        {{session('info')}}
+    </div>
+    @endif
     <div class="core__title">
         <span class="core__title--big">
-               Clasificaciones de los Convenios
+            Administración de Clasificaciones.
         </span>
         <span class="core__title--small">
-            Información General de la Clasificación
+            Convenios de la Clasificación: {{$clasificacion->chaNombreClasificacion}}
         </span>
-
-    </div>
+        
+    </div>    
     <div class="core__content">
-        <div class="container__swiper">
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="labels">
-                            <div class="label">
-                                <span class="label__number">1</span>
-                                <span class="label__text">Información General</span>
-                            </div>
-
-                        <div class="label label--next label--disable">
-                            <span class="label__number label__number--disable">2</span>
-                            <span class="label__text">Convenios</span>
-                        </div>
-                    </div>
-    
-         <!--Información General -->
-                    <div class="content_convenio">
-                        <div class="wrapper">
-                            <div class="fila">
-                                <span class="fila__label">ID de la Clasificación</span>
-                                <p class="fila__text"><b>{{$clasificacion->idClasificacion}}</b></p>
-                            </div>
-
-                            <div class="fila">
-                                <span class="fila__label">Nombre de la Clasificación </span>
-                                <p class="fila__text">{{$clasificacion->chaNombreClasificacion}}</p>
-                            </div>
-                        </div>
-                        <div class="wrapper">
-                            <div class="fila">
-                                <span class="fila__label">Fecha de Registro</span>
-                                <p class="fila__text"><b>{{$clasificacion->tstCreacionClasificacion}}</b></p>
-                            </div>
-
-                            <div class="fila">
-                                <span class="fila__label">Fecha de ultima Modificación</span>
-                                <p class="fila__text">{{$clasificacion->tstModificacionClasificacion}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    <div class="swiper-slide">
-                        <div class="labels">
-                            <div class="label label--disable">
-                                <span class="label__number label__number--disable">1</span>
-                                <span class="label__text">Información General</span>
-                            </div>
-
-                            <div class="label label--next">
-                                <span class="label__number">2</span>
-                                <span class="label__text">Convenios</span>
-                            </div>
-                    </div>
-          <!--Información relacionada de Convenios -->
-                <div class="core__content">
-                    <div class="content_convenio">
-                        <div class="content__table">
-                            <table class="tabla display" id="Table__Convenios">
-                                <thead>
-                                    <tr class="col">
-                                        <th>ID</th>
-                                        <th>Convenio</th>
-                                        <th>Fecha de Inicio</th>
-                                        <th>Fecha de Fin</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($clasificacion->convenios as $convenio)
-                                        <tr class="row">
-                                            <td><b>{{$convenio->idConvenio}}</b></td>
-                                            <td>{{$convenio->texNombreConvenio}}</td>
-                                            <td>{{$convenio->datFechaInicioConvenio}}</td>
-                                            <td>{{$convenio->datFechaFinConvenio}}</td>
-                                            <td>
-                                                <a href="{{route('tecnico.convenios.show', $convenio)}}" class="button__table">
-                                                    <span class="icon__button--view">
-                                                    <i class="fa-solid fa-eye"></i>
-                                                    </span>
-                                                    <span class="button__table--spam">Ver</span>
-                                                </a>                                                
-                                                <a href="{{url('/tecnico/convenios/'.$convenio->idConvenio.'/edit')}}" class="button__table button__table--right">
-                                                    <span class="icon__button--update">
-                                                    <i class="fa-solid fa-pen"></i>
-                                                    </span>
-                                                    <span class="button__table--spam">Actualizar</span>
-                                                </a>
-                                                <button type="button" class="button__table button__table--right">
-                                                    <span class="icon__button--delete">
-                                                    <i class="fa-solid fa-trash-can"></i>
-                                                    </span>
-                                                    <span class="button__table--spam">Eliminar</span>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>                    
-                </div>
-                
-            </div>
-        </div> 
-    </div>
-</div>
-    <!-- Botones que cambian de pantalla -->
-    <div class="swiper__buttons">
-        <div class="swiper-button-next ">
-            <span class=" slider__btn slider__btn--left">
-            <span>Siguiente</span>  <i class="fa-solid fa-arrow-right"></i></span>
-        </div>
-        <div class="swiper-button-prev">
-            <span class=" slider__btn slider__btn--right">
-            <i class="fa-solid fa-arrow-left"></i> <span>Anterior</span>
+        <div class="content__label">
+            <span class="label__number">
+                1
+            </span>
+            <span class="label__text">
+                Convenios
             </span>
         </div>
+        
+        <div class="content__table">
+            <table class="tabla display" id="Table__Convenios">
+                @can('tecnico.convenios.create')
+                <div class="button">
+                    <a href="{{route('tecnico.convenios.create')}}" class="nav__link nav__link--small">
+                        <span class="link__icon--margin">
+                            <i class="fa-solid fa-file"></i>
+                        </span>
+                        Nuevo
+                    </a>
+                </div>
+                @endcan
+                <thead>
+                    <tr class="col">
+                        <th>#</th>
+                        <th>Resolución</th>
+                        <th>Convenio</th>
+                        <th>Objeto del Convenio</th>
+                        <th>Coordinador</th>
+                        <th>Estado</th>
+                        <th>Suscripción y Vigencia</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($convenios as $numero => $convenio)
+                        <tr class="row">
+                            <td>{{$numero + 1}}</td>
+                            <td><b>{{$convenio->Resolucion}}</b></td>
+                            <td>{{$convenio->texNombreConvenio}}
+                            <td>{{$convenio->texObjetoConvenio}}</td>
+                            <td>
+                                @if(is_null($convenio->Coordinador)==false)
+                                    {{$convenio->Coordinador->chaCargoCoordinador}}
+                                    <br>
+                                    {{$convenio->Coordinador->dependencia->vchNombreDependencia}}
+                                    <br>
+                                    Mediante 
+                                    {{$convenio->Coordinador->pivot->chaNombreResolucion}}
+                                    @if(is_null($convenio->Delegado)==false)
+                                        <br>
+                                        Delega a
+                                        <br>
+                                        {{$convenio->Delegado->chaCargoCoordinador}}
+                                        <br>
+                                        {{$convenio->Delegado->dependencia->vchNombreDependencia}}
+                                        <br>
+                                        Mediante 
+                                        {{$convenio->Delegado->pivot->chaNombreResolucion}}
+                                    @endif
+                                @else
+                                Sin Coordinador
+                                @endif
+                            </td>
+                            @if(strcmp($convenio->texUrlConvenio,'Sin Link')!=0)
+                                <a href="{{$convenio->texUrlConvenio}}" target="_blank"  class="button__table button__table--right">
+                                    <span class="icon__button--update">
+                                    <i class="fa-solid fa-file" style="font-size: 18px;"></i>
+                                    </span>
+                                    <span class="button__table--spam">Ver Documento</span>
+                                </a>                                 
+                            @endif
+                            </td>
+                            <td>{{$convenio->Estado}}</td>
+                            <td>Suscrito
+                                <br>
+                                {{$convenio->datFechaInicioConvenio}}
+                                <br>
+                                <br>
+                                Vigencia
+                                <br>
+                                {{$convenio->Vigencia}}
+                            </td>
+                            <td>
+                                @can('tecnico.convenios.show')
+                                <a href="{{route('tecnico.convenios.show', $convenio)}}" class="button__table">
+                                    <span class="icon__button--view">
+                                    <i class="fa-solid fa-eye"></i>
+                                    </span>
+                                    <span class="button__table--spam">Ver</span>
+                                </a>  
+                                @endcan
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-    
 </section>
-
+<script>
+function filtroEstado(){
+    document.getElementById("filtro").submit(); 
+}
+</script>
 @endsection
+
+                

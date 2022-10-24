@@ -19,12 +19,14 @@ class Resolucion extends Model
                         'tstModificacionResolucion'];
 
 
+    //Relacion uno a muchos
+    public function Convenios(){
+        return $this->hasMany(Convenio::class,'idResolucion');
+    }
     //Relacion muchos a muchos 
     public function Coordinadores(){
         return $this->belongsToMany(Coordinador::class, 'v_coordinadores_resoluciones' ,'idResolucion', 'idCoordinador');
     }
 
-    public function Convenios(){
-        return $this->belongsToMany(Convenio::class, 'v_convenios_resoluciones' ,'idResolucion', 'idConvenio');
-    }
+    
 }

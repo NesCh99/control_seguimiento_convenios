@@ -23,12 +23,20 @@
             <span class="label__number">
                 1
             </span>
+            @if(is_null($band) == false)
+            <span class="label__text">
+                Convenios de {{$band}}
+            </span>
+            @else
             <span class="label__text">
                 Convenios
             </span>
+            @endif
         </div>
+        
         <div class="content__table">
             <table class="tabla display" id="Table__Convenios">
+                @can('tecnico.convenios.create')
                 <div class="button">
                     <a href="{{route('tecnico.convenios.create')}}" class="nav__link nav__link--small">
                         <span class="link__icon--margin">
@@ -37,21 +45,49 @@
                         Nuevo
                     </a>
                 </div>
+                @endcan
                 <thead>
                     <tr class="col">
-                        <th>ID</th>
+                        <th>#</th>
+                        <th>Resolución</th>
                         <th>Convenio</th>
-                        <th>Fecha de Inicio</th>
-                        <th>Fecha de Fin</th>
+                        <th>Objeto del Convenio</th>
+                        <th>Coordinador</th>
                         <th>Estado</th>
+                        <th>Suscripción y Vigencia</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($convenios as $convenio)
+                    @foreach($convenios as $numero => $convenio)
                         <tr class="row">
-                            <td><b>{{$convenio->idConvenio}}</b></td>
+                            <td>{{$numero + 1}}</td>
+                            <td><b>{{$convenio->Resolucion}}</b></td>
                             <td>{{$convenio->texNombreConvenio}}
+                            <td>{{$convenio->texObjetoConvenio}}</td>
+                            <td>
+                                @if(is_null($convenio->Coordinador)==false)
+                                    {{$convenio->Coordinador->chaCargoCoordinador}}
+                                    <br>
+                                    {{$convenio->Coordinador->dependencia->vchNombreDependencia}}
+                                    <br>
+                                    Mediante 
+                                    {{$convenio->Coordinador->pivot->chaNombreResolucion}}
+                                    @if(is_null($convenio->Delegado)==false)
+                                        <br>
+                                        Delega a
+                                        <br>
+                                        {{$convenio->Delegado->chaCargoCoordinador}}
+                                        <br>
+                                        {{$convenio->Delegado->dependencia->vchNombreDependencia}}
+                                        <br>
+                                        Mediante 
+                                        {{$convenio->Delegado->pivot->chaNombreResolucion}}
+                                    @endif
+                                @else
+                                Sin Coordinador
+                                @endif
+                            </td>
                             @if(strcmp($convenio->texUrlConvenio,'Sin Link')!=0)
                                 <a href="{{$convenio->texUrlConvenio}}" target="_blank"  class="button__table button__table--right">
                                     <span class="icon__button--update">
@@ -61,39 +97,45 @@
                                 </a>                                 
                             @endif
                             </td>
-                            <td>{{$convenio->datFechaInicioConvenio}}</td>
-                            <td>{{$convenio->datFechaFinConvenio}}</td>
-                            <?php 
-                                $fecha1 = new DateTime($convenio->datFechaFinConvenio); 
-                                $fecha2 = new DateTime();
-                                $estado = $fecha2->diff($fecha1)->format('%r%y') * 12;
-                                if($estado > 0 && $estado > 6){
-                                    $estado = 'Vigente';
-                                }else if($estado > 0 && $estado <= 6){
-                                    $estado = 'Por Caducar';
-                                }else{
-                                    $estado = 'Caducado';
-                                }?>
-                            <td>{{$estado}}</td>
+                            <td>{{$convenio->Estado}}</td>
+                            <td>Suscrito
+                                <br>
+                                {{$convenio->datFechaInicioConvenio}}
+                                <br>
+                                <br>
+                                Vigencia
+                                <br>
+                                {{$convenio->Vigencia}}
+                            </td>
                             <td>
+                            <form action="{{route('tecnico.convenios.destroy', $convenio->idConvenio)}}" method="POST">
+                            @csrf
+                            @method('DELETE') 
+                                @can('tecnico.convenios.show')
                                 <a href="{{route('tecnico.convenios.show', $convenio)}}" class="button__table">
                                     <span class="icon__button--view">
                                     <i class="fa-solid fa-eye"></i>
                                     </span>
                                     <span class="button__table--spam">Ver</span>
-                                </a>                                                
+                                </a>  
+                                @endcan   
+                                @can('tecnico.convenios.edit')
                                 <a href="{{url('/tecnico/convenios/'.$convenio->idConvenio.'/edit')}}" class="button__table button__table--right">
                                     <span class="icon__button--update">
                                     <i class="fa-solid fa-pen"></i>
                                     </span>
                                     <span class="button__table--spam">Actualizar</span>
                                 </a>
-                                <button type="button" class="button__table button__table--right">
+                                @endcan 
+                                @can('tecnico.convenios.destroy')
+                                <button type="submit" class="button__table button__table--right" onclick="return confirm('¿Seguro que deseas eliminar el registro?');">
                                     <span class="icon__button--delete">
                                     <i class="fa-solid fa-trash-can"></i>
                                     </span>
                                     <span class="button__table--spam">Eliminar</span>
                                 </button>
+                                @endcan 
+                            </form>
                             </td>
                         </tr>
                     @endforeach
@@ -102,6 +144,11 @@
         </div>
     </div>
 </section>
+<script>
+function filtroEstado(){
+    document.getElementById("filtro").submit(); 
+}
+</script>
 @endsection
 
                 
